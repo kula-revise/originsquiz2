@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Stuck | The Cold War: The Origins of the Cold War in Europe | Kula Revise</title>
+<style>
+  :root {
+    --sand: #F2E9D9; --paper: #FBF6EB; --cut: #FFFCF4; --ink: #1B2A33;
+    --a1: #B4622D;         /* copper, accent one: nav, emphasis, option letters, progress */
+    --a2: #1F6B58;         /* malachite, accent two: earned, correct, band, breakdown */
+    --copper: var(--a1); --malachite: var(--a2);   /* aliases so existing rules inherit the split */
+    --clay: #8C4A2F; --fade: #7B7263;
+    --serif: Georgia, 'Times New Roman', serif;
+    --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  /* Mode toggle, fixed bottom right. The skin supplies body.alt. */
+  .mode-toggle {
+    position: fixed; bottom: 0.9rem; right: 0.9rem; z-index: 40;
+    display: flex; align-items: center; gap: 0.4rem;
+    font-family: var(--sans); font-size: 0.66rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.55rem 0.75rem; min-height: 2.4rem;
+    background: var(--paper); color: var(--fade);
+    border: 1px solid rgba(0,0,0,0.18); cursor: pointer;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.16);
+  }
+  .mode-toggle:hover { color: var(--ink); border-color: var(--a1); }
+  .mode-toggle:focus-visible { outline: 2px solid var(--a1); outline-offset: 2px; }
+  .mode-toggle svg { width: 0.9rem; height: 0.9rem; fill: none; stroke: currentColor; stroke-width: 1.6; }
+  @media print { .mode-toggle { display: none; } }
+/* COLD WAR ORIGINS: zone
+   Checked against the identity register before designing. Vietnam holds cream
+   paper and a serif on soft rounded cards. USA 1920s holds a near-black deco
+   ground with tracked-out uppercase. Black Power holds bone with heavy condensed
+   uppercase and offset shadows. Black Consciousness holds manila paper with
+   typewriter mono on every label. Angola holds cool slate with mono labels and
+   hairline squares. Congo holds Ore Seam's warm radial washes. US Civil Rights
+   holds Depot: warm grey, asphalt graphite, rose, enamel sign plates.
+
+   The source course had its own identity, near-black violet with a serif display
+   face and a mono, framed as signals intelligence. It is dropped: a dark ground
+   collides with USA 1920s and mono labels collide with Angola and Frank Talk.
+
+   The metaphor here is the one thing every source in this unit argues about: a
+   line drawn across a map. Not the wall, which is only the last chapter, and not
+   spy fiction, which is the identity being replaced. So: the diagonal hatch a
+   1940s atlas uses to mark an occupied or disputed zone, a border red for
+   structure, and a steel blue for anything the learner earned.
+
+   Signature moves, each chosen because nothing else on the register uses it:
+     - cards bounded on two sides only, top and left, so they read as territory
+       rather than as boxes. Every other identity closes its cards
+     - a diagonal hatch ground, where Depot rules horizontally and Angola
+       vertically
+     - condensed grotesque headings over a book serif body, inverting Depot
+     - sources set in a hatched inset, so a source looks like a zone on the map
+     - mono appears nowhere */
+
+:root {
+  --sand:  #EFEEEA;   /* page: cold paper */
+  --paper: #FBFAF7;   /* cards */
+  --cut:   #E4E3DD;   /* insets, sources, carousels */
+  --ink:   #1B1D1F;
+  --clay:  #5A5F63;   /* stage tags, quiet labels */
+  --fade:  #83888C;
+  /* border red for structure, steel blue for reward */
+  --a1: #A32B23;  --a1-rgb: 163,43,35;
+  --a2: #2E5F8A;  --a2-rgb: 46,95,138;
+  --sans:  'Archivo Narrow', 'Archivo', 'Inter', system-ui, -apple-system, Arial, sans-serif;
+  --serif: 'Source Serif 4', 'Charter', Georgia, serif;
+  --mono:  var(--sans);
+}
+
+/* Ground: the diagonal hatch of a disputed zone on a period map. */
+body {
+  font-family: var(--serif) !important;
+  background-image:
+    repeating-linear-gradient(45deg,
+      transparent 0 9px, rgba(27,29,31,0.034) 9px 10px) !important;
+}
+h1, h2, h3 {
+  font-family: var(--sans) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.002em !important;
+}
+
+/* Cards are bounded on two sides only. Territory, not a box. */
+.card, .stat-wrap, .carousel, .kt {
+  border: 0 !important;
+  border-top: 3px solid var(--a1) !important;
+  border-left: 3px solid var(--a1) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: var(--paper) !important;
+}
+
+/* Labels: solid border-red plates in sentence case. No mono anywhere. */
+.stage-tag, .kt-label, .expl-label, .pop-label {
+  font-family: var(--sans) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.01em !important;
+  text-transform: none !important;
+  background: var(--a1) !important;
+  color: #F6F1F0 !important;
+  border-radius: 0 !important;
+  padding: 0.24rem 0.62rem !important;
+  display: inline-block;
+}
+.cover-eyebrow, .results-eyebrow, .top-meta {
+  font-family: var(--sans) !important;
+  color: var(--clay) !important;
+  letter-spacing: 0.06em !important;
+}
+.marks { font-family: var(--sans) !important; font-weight: 700 !important; color: var(--a2) !important; }
+
+/* A source is a zone on the map: hatched inset, fully bounded. */
+.source {
+  background: var(--cut) !important;
+  background-image:
+    repeating-linear-gradient(45deg,
+      transparent 0 7px, rgba(163,43,35,0.055) 7px 8px) !important;
+  border: 2px solid var(--a1) !important;
+  border-radius: 0 !important;
+  padding: 1.15rem 1.2rem !important;
+}
+.source, .source p, .source li { font-family: var(--serif) !important; }
+.source-attr {
+  font-family: var(--sans) !important;
+  font-size: 0.7rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.01em !important;
+  text-transform: none !important;
+  color: #F6F1F0 !important;
+  background: var(--a1);
+  border-radius: 0;
+  padding: 0.5rem 0.62rem;
+  margin-bottom: 0.9rem;
+}
+
+/* Cover flourish: a boundary line, solid then broken, the way an atlas marks a
+   line that is agreed in one stretch and disputed in the next. */
+.header-block::before, .cover-arc, .cover-fan { display: none !important; }
+.rule, .cover-rule, .flourish, .story-rule {
+  width: 170px !important;
+  height: 4px !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  background-image:
+    linear-gradient(90deg, var(--a1) 0 84px, transparent 84px 100%),
+    repeating-linear-gradient(90deg,
+      var(--a1) 84px 96px, transparent 96px 106px) !important;
+}
+/* The engine reveals cover lines as inline spans on a 350ms stagger, so three
+   sentences flow together as one filling paragraph. The briefing wants them to
+   arrive one at a time, so each span becomes its own line. The engine is not
+   touched: only the display changes, and the existing stagger does the rest. */
+.cover-line {
+  font-style: normal !important;
+  color: var(--clay) !important;
+  min-height: 9rem;
+  max-width: 32rem;
+}
+.cover-line span {
+  display: block;
+  margin-bottom: 0.9rem;
+  transition: opacity 0.55s ease, transform 0.55s ease !important;
+  transform: translateY(5px);
+}
+.cover-line span.vis { transform: translateY(0); }
+.cover-line span:last-child { color: var(--ink); font-weight: 600; }
+@media (max-width: 520px) { .cover-line { min-height: 12rem; } }
+.story-num, .cover-title, .q-text, .story-line {
+  font-family: var(--sans) !important;
+}
+.story-num { letter-spacing: -0.01em !important; }
+
+.chip { border-radius: 0 !important; font-family: var(--sans) !important; font-size: 0.62rem !important; }
+
+.btn-begin {
+  background: var(--a1) !important;
+  color: #F6F1F0 !important;
+  border: 2px solid var(--a1) !important;
+  border-radius: 0 !important;
+  font-family: var(--sans) !important;
+}
+.btn-begin:hover { background: #862017 !important; border-color: #862017 !important; }
+
+.stat-num { color: var(--a1) !important; font-family: var(--sans) !important; font-weight: 700 !important; }
+.stat-label { color: var(--clay) !important; font-family: var(--sans) !important; }
+
+
+/* ---- DARK MODE ------------------------------------------------------------
+   The hatch inverts to a blueprint negative rather than simply darkening. */
+body.alt {
+  --sand:  #14181C;
+  --paper: #1C2228;
+  --cut:   #232B32;
+  --ink:   #E7EBEE;
+  --clay:  #9EA9B2;
+  --fade:  #8B959D;
+  --a1: #D4736A;  --a1-rgb: 212,115,106;
+  --a2: #6BA3D6;  --a2-rgb: 107,163,214;
+}
+body.alt { background-image:
+  repeating-linear-gradient(45deg,
+    transparent 0 9px, rgba(231,235,238,0.042) 9px 10px) !important; }
+body.alt .card, body.alt .stat-wrap, body.alt .carousel, body.alt .kt {
+  border-top-color: var(--a1) !important; border-left-color: var(--a1) !important; }
+body.alt .source {
+  border-color: var(--a1) !important;
+  background-image: repeating-linear-gradient(45deg,
+    transparent 0 7px, rgba(212,115,106,0.09) 7px 8px) !important; }
+body.alt .stage-tag, body.alt .kt-label,
+body.alt .expl-label, body.alt .pop-label { background: rgba(212,115,106,0.22) !important; color: #F2C9C4 !important; }
+body.alt .source-attr { background: rgba(212,115,106,0.22) !important; color: #F2C9C4 !important; }
+body.alt .btn-begin { background: var(--a1) !important; border-color: var(--a1) !important; color: #14181C !important; }
+body.alt .btn-begin:hover { background: #E08A82 !important; border-color: #E08A82 !important; }
+body.alt .mode-toggle { background: var(--paper); border-color: rgba(231,235,238,0.24); }
+body.alt .rule, body.alt .cover-rule, body.alt .flourish, body.alt .story-rule {
+  background-image:
+    linear-gradient(90deg, var(--a1) 0 84px, transparent 84px 100%),
+    repeating-linear-gradient(90deg, var(--a1) 84px 96px, transparent 96px 106px) !important; }
+
+body.alt .chip { background: rgba(212,115,106,0.16) !important; color: #F2C9C4 !important; }
+body.alt .chip-recall,     body.alt .chip-extract   { background: rgba(212,115,106,0.20) !important; color: #F5D2CD !important; }
+body.alt .chip-understand, body.alt .chip-interpret { background: rgba(107,163,214,0.20) !important; color: #C3DCF1 !important; }
+body.alt .chip-apply,      body.alt .chip-evaluate  { background: rgba(231,235,238,0.16) !important; color: #E7EBEE !important; }
+
+
+/* ---- DARK MODE STATE COLOURS ----------------------------------------------
+   Several states carry hardcoded light values in the base engine. Left alone
+   they give pale text on pale grounds. Both .option and .option-btn are named,
+   because the lesson engine and the quiz shell use different class names. */
+
+body.alt .option, body.alt .option-btn {
+  background: var(--cut) !important;
+  border-color: rgba(231,235,238,0.20) !important;
+  color: var(--ink) !important;
+}
+body.alt .option.selected, body.alt .option-btn.selected {
+  background: rgba(107,163,214,0.16) !important; border-color: #6BA3D6 !important; }
+body.alt .option.correct, body.alt .option-btn.correct {
+  background: rgba(107,163,214,0.20) !important;
+  border-color: #6BA3D6 !important;
+  color: var(--ink) !important;
+}
+body.alt .option.wrong, body.alt .option-btn.wrong {
+  background: rgba(212,115,106,0.18) !important;
+  border-color: #D4736A !important;
+  color: var(--ink) !important;
+}
+body.alt .option.correct .opt-text, body.alt .option-btn.correct .opt-text,
+body.alt .option.wrong   .opt-text, body.alt .option-btn.wrong   .opt-text { color: var(--ink) !important; }
+body.alt .option.correct .opt-letter, body.alt .option-btn.correct .opt-letter { color: #8FBEE4 !important; }
+body.alt .option.wrong   .opt-letter, body.alt .option-btn.wrong   .opt-letter { color: #E39A93 !important; }
+body.alt .option.dimmed, body.alt .option-btn.dimmed { opacity: 0.72 !important; }
+body.alt .opt-mark { color: var(--ink) !important; }
+
+body.alt .primary-btn {
+  background: var(--cut) !important;
+  border: 1px solid rgba(212,115,106,0.40) !important;
+  color: var(--ink) !important;
+}
+body.alt .primary-btn:hover { background: #2C353D !important; }
+body.alt .primary-btn .btn-title { color: var(--ink) !important; }
+body.alt .primary-btn .btn-sub, body.alt .primary-btn .btn-arrow { color: var(--clay) !important; }
+body.alt .section-btn { border-color: rgba(231,235,238,0.18) !important; color: var(--ink) !important; }
+body.alt .section-btn:hover { background: var(--cut) !important; border-color: var(--a1) !important; }
+body.alt .primary-btn-small { background: var(--a1) !important; color: #14181C !important; }
+body.alt .primary-btn-small:hover:not(:disabled) { background: #E08A82 !important; }
+body.alt .secondary-btn { border-color: rgba(231,235,238,0.30) !important; color: var(--ink) !important; }
+body.alt .secondary-btn:hover:not(:disabled) { background: var(--cut) !important; }
+body.alt .explanation { background: var(--cut) !important; border-color: rgba(212,115,106,0.28) !important; }
+body.alt .expl-text { color: var(--ink) !important; }
+body.alt .quiz-foot, body.alt .quiz-foot a { color: var(--clay) !important; }
+
+
+/* The toggle is fixed bottom right and lands on Continue on a short viewport. */
+.mode-toggle { bottom: 1rem; right: 1rem; border-radius: 0 !important; font-family: var(--sans) !important; }
+body { padding-bottom: 4.5rem !important; }
+@media (max-width: 520px) {
+  .mode-toggle { bottom: 0.7rem; right: 0.7rem; padding: 0.45rem 0.6rem; font-size: 0.6rem; }
+  .card, .stat-wrap, .carousel, .kt { border-top-width: 2px !important; border-left-width: 2px !important; }
+}
+
+/* Figures. Caption reads left at a measure that holds on a phone. */
+.figure figcaption {
+  text-align: left !important;
+  max-width: 34rem;
+  margin-left: auto; margin-right: auto;
+  font-family: var(--sans) !important;
+  font-size: 0.82rem !important;
+  color: var(--clay) !important;
+  border-top: 2px solid var(--a1);
+  padding-top: 0.6rem;
+}
+.figure img { border: 1px solid rgba(163,43,35,0.35) !important; border-radius: 0 !important; }
+body.alt .figure img { border-color: rgba(212,115,106,0.38) !important; filter: brightness(0.9) contrast(1.02); }
+body.alt .figure figcaption { border-top-color: var(--a1); }
+
+
+/* ---- DARK MODE: hardcoded body text -------------------------------------
+   The engine sets a literal dark grey on the key-terms definitions, the source
+   expander and the discussion body, so those blocks stay dark on a dark ground
+   and become unreadable when the toggle is switched. The chip labels have the
+   same problem. All of it is fixed here rather than in the engine. */
+body.alt .kt-def,
+body.alt .toggle-body,
+body.alt .disc-body,
+body.alt .cover-line { color: #D3D9DE !important; }
+body.alt .kt-term { border-color: rgba(231,235,238,0.22) !important; }
+body.alt .kt-term summary { color: var(--ink) !important; }
+body.alt .kt-label { border-top-color: rgba(231,235,238,0.22) !important; }
+body.alt .chip-argue, body.alt .chip-evidence, body.alt .chip-extract,
+body.alt .chip-interpret, body.alt .chip-weigh, body.alt .chip-evaluate,
+body.alt .chip-recall, body.alt .chip-understand, body.alt .chip-apply,
+body.alt .chip-instinct { color: #EDE4E2 !important; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    background:
+      repeating-linear-gradient(90deg, rgba(27,42,51,0.028) 0 1px, transparent 1px 5px),
+      radial-gradient(ellipse at top right, rgba(180,98,45,0.10) 0%, transparent 58%),
+      radial-gradient(ellipse at bottom left, rgba(31,107,88,0.09) 0%, transparent 58%),
+      var(--sand);
+    padding: 2rem 1rem 3rem;
+    font-family: var(--serif);
+    color: var(--ink); line-height: 1.6; -webkit-text-size-adjust: 100%;
+    -webkit-user-select: none; user-select: none;
+  }
+  .container { max-width: 780px; margin: 0 auto; }
+  .header-block { text-align: center; margin-bottom: 2rem; padding: 1.4rem 0 1.2rem; position: relative; }
+  .header-block::before {
+    content: ""; position: absolute; z-index: 0; top: 0; left: 50%; transform: translateX(-50%);
+    width: 260px; height: 92px; pointer-events: none;
+    background: repeating-radial-gradient(circle at 50% 100%, rgba(180,98,45,0.30) 0 2px, transparent 2px 15px);
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 92%);
+    mask-image: linear-gradient(to bottom, #000 0%, transparent 92%);
+  }
+  .eyebrow { font-family: var(--sans); position: relative; z-index: 1; font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--clay); font-weight: 700; margin-bottom: 0.9rem; }
+  .masthead { position: relative; z-index: 1; font-size: clamp(2.2rem,6.4vw,3.4rem); font-weight: 800; line-height: 1.04; letter-spacing: -0.025em; }
+  .sub { position: relative; z-index: 1; font-size: 1rem; color: var(--fade); margin-top: 0.6rem; }
+  .rule { width: 92px; height: 9px; margin: 1.6rem auto 0;
+    background:
+      radial-gradient(circle at 9px 4.5px, var(--a1) 0 4px, transparent 4.5px),
+      radial-gradient(circle at 46px 4.5px, var(--a1) 0 4px, transparent 4.5px),
+      radial-gradient(circle at 83px 4.5px, var(--a1) 0 4px, transparent 4.5px); }
+  .intro-box { background: var(--paper); border: 1px solid rgba(27,42,51,0.12); border-left: 5px solid var(--malachite); padding: 1.4rem 1.6rem; margin-bottom: 2rem; }
+  .intro-label { font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--malachite); font-weight: 700; margin-bottom: 0.6rem; }
+  .intro-text { line-height: 1.68; font-size: 1rem; }
+  .key-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem; margin-bottom: 2.2rem; }
+  .key-item { display: flex; flex-direction: column; gap: 0.45rem; padding: 0.85rem; background: var(--paper); border: 1px solid rgba(27,42,51,0.1); }
+  .chip { font-family: var(--sans); display: inline-block; padding: 0.22rem 0.7rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; width: fit-content; }
+  .chip-recall { background: #E7D6C4; color: #7B3F1C; }
+  .chip-understand { background: #D6E3DB; color: #1B5445; }
+  .chip-apply { background: var(--ink); color: #F0E3CF; }
+  .key-desc { font-size: 0.83rem; color: var(--fade); }
+  .sections-label { font-family: var(--sans); font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--fade); text-align: center; margin-bottom: 1.2rem; font-weight: 700; }
+  .primary-btn { font-family: var(--sans); width: 100%; display: flex; align-items: center; gap: 1rem; padding: 1.3rem 1.5rem; background: var(--ink); color: #F4EADA; border: none; cursor: pointer; font-family: inherit; text-align: left; transition: all 0.2s; margin-bottom: 1rem; }
+  .primary-btn:hover { background: #12202a; transform: translateX(4px); }
+  .btn-num { font-family: var(--sans); font-size: 1.4rem; color: var(--copper); font-weight: 800; min-width: 35px; }
+  .btn-txt { flex: 1; display: flex; flex-direction: column; gap: 0.2rem; }
+  .btn-title { font-family: var(--sans); font-size: 1.15rem; font-weight: 700; }
+  .btn-sub { font-family: var(--sans); font-size: 0.82rem; color: #cbb9a0; }
+  .btn-arrow { font-size: 1.3rem; color: var(--copper); }
+  .section-list { display: flex; flex-direction: column; gap: 0.5rem; }
+  .section-btn { display: flex; align-items: center; gap: 1rem; padding: 0.95rem 1.1rem; background: transparent; border: 1px solid rgba(27,42,51,0.2); cursor: pointer; font-family: inherit; text-align: left; transition: all 0.2s; color: var(--ink); }
+  .section-btn:hover { background: var(--paper); border-color: var(--copper); }
+  .section-roman { font-family: var(--sans); color: var(--copper); font-weight: 800; min-width: 35px; font-size: 0.95rem; }
+  .section-name { flex: 1; font-size: 0.95rem; }
+  .section-count { font-size: 0.78rem; color: var(--fade); letter-spacing: 0.05em; }
+  .footer { text-align: center; font-size: 0.79rem; color: var(--fade); margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(27,42,51,0.14); line-height: 1.6; }
+
+  .quiz-top { margin-bottom: 1.5rem; }
+  .quiz-eyebrow { font-family: var(--sans); display: flex; justify-content: space-between; align-items: baseline; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--malachite); font-weight: 700; margin-bottom: 0.55rem; gap: 1rem; }
+  .quiz-progress { color: var(--fade); font-weight: 500; letter-spacing: 0.04em; text-transform: none; }
+  .progress-track { height: 3px; background: rgba(27,42,51,0.12); overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--copper); transition: width 0.35s ease; }
+  .quiz-card { background: var(--paper); border: 1px solid rgba(27,42,51,0.12); border-left: 5px solid var(--copper); padding: 1.7rem 1.5rem; margin-bottom: 1.3rem; }
+  .quiz-meta { display: flex; gap: 0.6rem; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; }
+  .section-tag { font-family: var(--sans); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--clay); font-weight: 700; }
+  .question-text { font-size: 1.24rem; line-height: 1.4; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 1.3rem; }
+  .options { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.2rem; }
+  .option-btn { display: flex; align-items: flex-start; gap: 0.85rem; padding: 1rem 1.05rem; background: var(--sand); border: 1px solid rgba(27,42,51,0.13); cursor: pointer; font-family: inherit; text-align: left; font-size: 0.97rem; line-height: 1.55; color: var(--ink); transition: all 0.18s; width: 100%; }
+  .option-btn:hover:not(:disabled) { background: var(--cut); border-color: var(--copper); }
+  .option-btn:disabled { cursor: default; }
+  .option-btn.selected { background: var(--cut); border-color: var(--copper); border-width: 2px; padding: 0.94rem 0.99rem; }
+  .option-btn.correct { background: #E2EDE4; border-color: var(--malachite); border-width: 2px; padding: 0.94rem 0.99rem; }
+  .option-btn.wrong { background: #F2DDD3; border-color: var(--clay); border-width: 2px; padding: 0.94rem 0.99rem; }
+  .option-btn.dimmed { opacity: 0.48; }
+  .opt-letter { font-weight: 800; color: var(--copper); min-width: 1.1rem; }
+  .opt-text { flex: 1; }
+  .opt-mark { font-weight: 700; font-size: 1.1rem; }
+  .explanation { background: var(--cut); border: 1px solid rgba(27,42,51,0.12); border-left: 5px solid var(--malachite); padding: 1.15rem 1.2rem; margin-bottom: 0.3rem; }
+  .expl-label { font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--malachite); font-weight: 700; margin-bottom: 0.5rem; }
+  .expl-text { line-height: 1.68; font-size: 0.95rem; }
+  .quiz-actions { display: flex; justify-content: space-between; gap: 0.8rem; margin-top: 1.2rem; }
+  .secondary-btn { padding: 0.8rem 1.2rem; background: transparent; border: 1px solid rgba(27,42,51,0.28); color: var(--ink); font-family: inherit; font-size: 0.92rem; font-weight: 600; cursor: pointer; }
+  .secondary-btn:hover:not(:disabled) { background: var(--paper); }
+  .secondary-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+  .primary-btn-small { padding: 0.85rem 1.5rem; background: var(--malachite); border: none; color: #F7F1E4; font-family: inherit; font-size: 0.95rem; cursor: pointer; font-weight: 700; }
+  .primary-btn-small:hover:not(:disabled) { background: #164C3F; }
+  .primary-btn-small:disabled { opacity: 0.35; cursor: not-allowed; }
+  .quiz-foot { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+  .link-btn { background: transparent; border: none; color: var(--fade); font-family: inherit; font-size: 0.85rem; cursor: pointer; text-decoration: underline; }
+  .score-tally { font-size: 0.82rem; color: var(--fade); font-weight: 600; }
+
+  .score-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.9rem; margin-bottom: 1.4rem; }
+  .score-block { background: var(--paper); border: 1px solid rgba(27,42,51,0.12); border-top: 4px solid var(--copper); padding: 1.3rem 0.8rem; text-align: center; }
+  .score-num { font-size: 2.6rem; font-weight: 800; color: var(--ink); line-height: 1; letter-spacing: -0.03em; }
+  .score-num.red { color: var(--clay); }
+  .score-den { font-size: 1.1rem; color: var(--fade); font-weight: 500; }
+  .score-label { font-family: var(--sans); font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fade); margin-top: 0.5rem; font-weight: 700; }
+  .compare-line { text-align: center; font-weight: 700; color: var(--malachite); background: var(--paper); border: 1px solid rgba(31,107,88,0.25); padding: 0.9rem 1rem; margin-bottom: 1.5rem; }
+  .score-word { font-family: var(--sans); font-size: 1.3rem; font-weight: 800; color: var(--a2); line-height: 2; letter-spacing: -0.01em; }
+  .grade-desc { text-align: center; margin-bottom: 1.6rem; padding: 0 0.5rem; line-height: 1.65; }
+  .breakdown { background: var(--paper); border: 1px solid rgba(27,42,51,0.12); padding: 1.3rem; margin-bottom: 1.4rem; }
+  .breakdown-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--malachite); font-weight: 700; margin-bottom: 1rem; text-align: center; }
+  .breakdown-row { display: grid; grid-template-columns: 1fr 96px 44px; gap: 0.7rem; align-items: center; margin-bottom: 0.7rem; font-size: 0.86rem; }
+  .breakdown-name { font-weight: 600; }
+  .breakdown-bar { height: 9px; background: rgba(27,42,51,0.08); overflow: hidden; }
+  .breakdown-fill { height: 100%; background: var(--copper); transition: width 0.4s; }
+  .breakdown-score { color: var(--fade); text-align: right; font-weight: 700; }
+  .review-all-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fade); font-weight: 700; margin-bottom: 1rem; text-align: center; }
+  .review-card { background: var(--paper); border: 1px solid rgba(27,42,51,0.12); padding: 1.1rem 1.2rem; margin-bottom: 0.8rem; border-left: 4px solid var(--fade); }
+  .review-card.got { border-left-color: var(--malachite); }
+  .review-card.missed { border-left-color: var(--clay); }
+  .review-q { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.5rem; line-height: 1.4; }
+  .review-a { font-size: 0.88rem; line-height: 1.55; margin-bottom: 0.3rem; }
+  .review-a .lab { font-weight: 700; }
+  .review-a.yours-wrong { color: var(--clay); }
+  .review-a.right { color: var(--malachite); }
+  .review-actions { margin-top: 1.6rem; }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- MENU -->
+  <div id="menu-screen">
+    <div class="header-block">
+      <div class="eyebrow">Kula Revise &middot; Grade 12 &middot; Cold War</div>
+      <h1 class="masthead">What Stuck</h1>
+      <div class="sub" id="masthead-sub">After Lesson 5</div>
+      <div class="rule"></div>
+    </div>
+    <div class="intro-box">
+      <div class="intro-label">Before you start</div>
+      <p class="intro-text"><span id="intro-body"></span></p>
+    </div>
+    <div class="key-row">
+      <div class="key-item"><span class="chip chip-recall">Recall</span><span class="key-desc">The fact itself: a date, name or policy</span></div>
+      <div class="key-item"><span class="chip chip-understand">Understand</span><span class="key-desc">What the fact means or why it happened</span></div>
+      <div class="key-item"><span class="chip chip-apply">Apply</span><span class="key-desc">Spot what is wrong with a claim</span></div>
+    </div>
+    <div>
+      <div class="sections-label">&mdash; Choose what to answer &mdash;</div>
+      <button class="primary-btn" data-filter="all">
+        <span class="btn-num">I.</span>
+        <span class="btn-txt"><span class="btn-title">Full check</span><span class="btn-sub">All 18 questions &middot; all five sections</span></span>
+        <span class="btn-arrow">&rarr;</span>
+      </button>
+      <div class="section-list" id="section-list"></div>
+    </div>
+    <div class="footer">About 12 minutes for the full set. Write your score down at the end.</div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz-screen" class="hidden">
+    <div class="quiz-top">
+      <div class="quiz-eyebrow"><span id="quiz-section-name"></span><span class="quiz-progress" id="quiz-progress"></span></div>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width: 0%"></div></div>
+    </div>
+    <div class="quiz-card">
+      <div class="quiz-meta"><span class="section-tag" id="section-tag"></span><span class="chip" id="difficulty-chip"></span></div>
+      <h2 class="question-text" id="question-text"></h2>
+      <div class="options" id="options-container"></div>
+      <div class="explanation hidden" id="explanation"><div class="expl-label">Why</div><div class="expl-text" id="expl-text"></div></div>
+      <div class="quiz-actions">
+        <button class="secondary-btn" id="prev-btn">&larr; Previous</button>
+        <button class="primary-btn-small" id="action-btn">Submit answer</button>
+      </div>
+    </div>
+    <div class="quiz-foot">
+      <button class="link-btn" id="exit-btn">Exit to menu</button>
+      <span class="score-tally" id="score-tally">Score so far: 0 / 0</span>
+    </div>
+  </div>
+
+  <!-- REVIEW -->
+  <div id="review-screen" class="hidden">
+    <div class="header-block">
+      <div class="eyebrow">After the lessons</div>
+      <h1 class="masthead" style="font-size: clamp(1.9rem,5vw,2.8rem);">Where You Stand</h1>
+      <div class="rule"></div>
+    </div>
+    <div class="score-row">
+      <div class="score-block"><div class="score-num"><span id="score-correct">0</span><span class="score-den">/<span id="score-total">0</span></span></div><div class="score-label">Correct</div></div>
+      <div class="score-block"><div class="score-num"><span id="score-percent">0</span><span class="score-den">%</span></div><div class="score-label">Accuracy</div></div>
+      <div class="score-block"><div class="score-word" id="score-grade">-</div><div class="score-label">Band</div></div>
+    </div>
+    <div class="grade-desc" id="grade-desc"></div>
+    <p class="compare-line hidden" id="compare-line"></p>
+    <div class="breakdown"><div class="breakdown-label">By tier</div><div id="level-rows"></div></div>
+    <div class="breakdown"><div class="breakdown-label">By section</div><div id="breakdown-rows"></div></div>
+    <div><div class="review-all-label">Every question</div><div id="review-cards"></div></div>
+    <div class="review-actions">
+      <button class="primary-btn" id="restart-btn"><span class="btn-txt"><span class="btn-title">Return to menu</span><span class="btn-sub">Try another section or retake the full test</span></span><span class="btn-arrow">&#8635;</span></button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* kula: re-entry guard. Every declaration below is function scoped, so a
+   viewer that re-runs this script re-initialises instead of throwing a
+   redeclaration SyntaxError and leaving FLOW undefined. */
+(function(){
+const MODE = "b";
+const INTRO = "Same eighteen facts as the check you took before Lesson 1, approached from the other side. This one measures what stuck rather than what you recognised. Enter your earlier score if you have it and the report will compare the two.";
+const SECTIONS = ["The alliance and what broke it", "Spheres of interest and the Iron Curtain", "Containment and the alliances", "The Berlin crises", "Who was to blame"];
+const QUESTIONS = [
+  {
+    "question": "The Yalta Conference took place while which war was still being fought?",
+    "options": [
+      "The Second World War",
+      "The First World War",
+      "The war in Korea",
+      "The war in Vietnam"
+    ],
+    "correct": 0,
+    "explanation": "The Second World War, which is the single most important fact about Yalta. The three of them still needed each other, and that is why they agreed anything at all. Hold that and you can explain why Potsdam went so much colder five months later.",
+    "id": 1,
+    "slot": 1,
+    "section": "The alliance and what broke it",
+    "tier": "Recall"
+  },
+  {
+    "question": "Which American President signed the Yalta agreement in February 1945?",
+    "options": [
+      "Franklin Roosevelt",
+      "Harry Truman",
+      "Dwight Eisenhower",
+      "Woodrow Wilson"
+    ],
+    "correct": 0,
+    "explanation": "Franklin Roosevelt, who was dead nine weeks later. That gap is why Yalta and Potsdam feel like different worlds to you. Option {opt1} took over afterwards, and putting him at Yalta removes the change of leadership a marker is looking for.",
+    "id": 2,
+    "slot": 2,
+    "section": "The alliance and what broke it",
+    "tier": "Recall"
+  },
+  {
+    "question": "What did the defeat of Germany in May 1945 change for the Grand Alliance?",
+    "options": [
+      "It removed the only thing that had ever held the three of them together",
+      "It gave the Soviet Union a reason to withdraw its army from eastern Europe",
+      "It meant the United Nations could now settle any disputes between them",
+      "It allowed the three powers to agree on a single government for Germany"
+    ],
+    "correct": 0,
+    "explanation": "The alliance was built on a shared enemy and nothing else, so beating that enemy removed its only foundation. Option {opt1} is the reverse of what happened, since the Red Army stayed exactly where it was. Get this the wrong way round and you cannot explain anything that follows.",
+    "id": 3,
+    "slot": 3,
+    "section": "The alliance and what broke it",
+    "tier": "Understand"
+  },
+  {
+    "question": "A learner writes: 'Churchill represented Britain throughout the Potsdam Conference.' What is the error?",
+    "options": [
+      "Attlee replaced him partway through, after Britain held a general election",
+      "Britain sent its foreign secretary instead, because Churchill was rather ill",
+      "Churchill had already died, so Britain was represented by Anthony Eden alone",
+      "Britain was not represented at Potsdam at all, only at the Yalta talks"
+    ],
+    "correct": 0,
+    "explanation": "Britain voted mid-conference and Clement Attlee replaced Churchill at the table. Losing that detail costs you the point that Potsdam had two new faces out of three. Option {opt3} is the sort of overstatement that unravels an answer, and a marker reading it stops trusting anything else you say.",
+    "id": 4,
+    "slot": 4,
+    "section": "The alliance and what broke it",
+    "tier": "Apply"
+  },
+  {
+    "question": "Which country's 1948 coup hardened Western opinion most decisively?",
+    "options": [
+      "Czechoslovakia",
+      "Poland",
+      "Hungary",
+      "Romania"
+    ],
+    "correct": 0,
+    "explanation": "Czechoslovakia, because it was the exception. The others had communist governments imposed while the Red Army stood there. This one had held a genuinely contested election in 1946. Option {opt1} matters to your answer too, and it is not the one that changed minds in the West.",
+    "id": 5,
+    "slot": 5,
+    "section": "Spheres of interest and the Iron Curtain",
+    "tier": "Recall"
+  },
+  {
+    "question": "In which country did Churchill give the speech that made iron curtain famous?",
+    "options": [
+      "The United States",
+      "The United Kingdom",
+      "The Soviet Union",
+      "West Germany"
+    ],
+    "correct": 0,
+    "explanation": "Fulton is in Missouri, so he said it in America with Truman sitting behind him. That is the detail that gives the speech its weight, because the audience he needed was American. Option {opt1} is the obvious guess and it costs you the point about who he was trying to persuade.",
+    "id": 6,
+    "slot": 6,
+    "section": "Spheres of interest and the Iron Curtain",
+    "tier": "Recall"
+  },
+  {
+    "question": "Why is the term satellite state used for countries like Poland and Hungary?",
+    "options": [
+      "They were independent on paper but their governments followed Moscow",
+      "They had been annexed formally and made part of the Soviet Union",
+      "They were occupied by Soviet troops and had no government at all",
+      "They chose communism freely and then allied themselves with Moscow"
+    ],
+    "correct": 0,
+    "explanation": "The word does a precise job: formally independent, actually steered from outside. Option {opt1} describes the three Baltic republics, which were annexed outright and are a different case. Use the terms interchangeably and a marker cannot tell whether you know the difference.",
+    "id": 7,
+    "slot": 7,
+    "section": "Spheres of interest and the Iron Curtain",
+    "tier": "Understand"
+  },
+  {
+    "question": "About how many Eastern European states had governments loyal to Moscow by 1948?",
+    "options": [
+      "Eight",
+      "Three",
+      "Twelve",
+      "Twenty"
+    ],
+    "correct": 0,
+    "explanation": "Eight, which is worth carrying because it makes the scale concrete for you. Option {opt1} is the number of Baltic republics annexed outright, so the two figures are easy to swap. Keep them apart and your answer on Soviet expansion has real evidence in it.",
+    "id": 8,
+    "slot": 8,
+    "section": "Spheres of interest and the Iron Curtain",
+    "tier": "Recall"
+  },
+  {
+    "question": "Which two countries received the first aid under the Truman Doctrine?",
+    "options": [
+      "Greece and Turkey",
+      "Greece and Italy",
+      "Turkey and Iran",
+      "Italy and France"
+    ],
+    "correct": 0,
+    "explanation": "Greece, where a civil war was being fought against communist guerrillas, and Turkey, which was under Soviet pressure. Britain had been paying for Greece and said in February 1947 that it could not any more. That is the trigger, and a marker wants you to name it.",
+    "id": 9,
+    "slot": 9,
+    "section": "Containment and the alliances",
+    "tier": "Recall"
+  },
+  {
+    "question": "How much did Truman originally request from Congress for European recovery?",
+    "options": [
+      "About 17 billion dollars",
+      "About 13.3 billion dollars",
+      "About 22 billion dollars",
+      "About 10 billion dollars"
+    ],
+    "correct": 0,
+    "explanation": "Seventeen billion over four years, requested in December 1947. Congress cut it by nearly a quarter before passing it, which tells you something real about American politics. Option {opt1} is what was actually spent, and confusing the two makes a marker doubt both figures.",
+    "id": 10,
+    "slot": 10,
+    "section": "Containment and the alliances",
+    "tier": "Recall"
+  },
+  {
+    "question": "What did Poland and Czechoslovakia responding positively to Marshall aid reveal?",
+    "options": [
+      "That Moscow, not their own governments, was deciding their foreign policy",
+      "That the two countries had already left the Soviet sphere of influence",
+      "That the Marshall Plan was more generous than the Soviet Union claimed",
+      "That the aid would be accepted right across the whole of Europe"
+    ],
+    "correct": 0,
+    "explanation": "Both said yes and both were overruled from Moscow, which told the West more about who governed them than any speech could. Option {opt1} is the opposite conclusion and the episode proves it wrong. Use this as your evidence of Soviet control and a marker will credit it.",
+    "id": 11,
+    "slot": 11,
+    "section": "Containment and the alliances",
+    "tier": "Understand"
+  },
+  {
+    "question": "What triggered the formation of the Warsaw Pact in 1955?",
+    "options": [
+      "West Germany was admitted to NATO, six years after NATO was founded",
+      "The Soviet Union tested its first atomic bomb and felt able to respond",
+      "Stalin died and his successors wanted a military alliance of their own",
+      "The Berlin blockade had failed and Moscow needed a new way to apply pressure"
+    ],
+    "correct": 0,
+    "explanation": "A rearmed West Germany inside NATO was the specific trigger, ten years after German troops had last been in the Soviet Union. Option {opt3} is seven years too early. Treat NATO and the Pact as one moment and you lose the six-year gap that a marker is looking for.",
+    "id": 12,
+    "slot": 12,
+    "section": "Containment and the alliances",
+    "tier": "Understand"
+  },
+  {
+    "question": "A learner writes: 'Containment meant removing communism from Eastern Europe.' What is the error?",
+    "options": [
+      "Containment meant stopping it spreading further, and not rolling it back",
+      "Containment applied only to Asia, and never to Europe at any point",
+      "Containment was a Soviet policy rather than an American one at all",
+      "Containment was abandoned just before the Truman Doctrine was announced"
+    ],
+    "correct": 0,
+    "explanation": "This is the error that costs the most marks in this whole topic. Rolling communism back would have meant war with the Soviet Union; holding the line where it stood would not. Say containment aimed to remove communism and everything you write about 1947 points the wrong way.",
+    "id": 13,
+    "slot": 13,
+    "section": "Containment and the alliances",
+    "tier": "Apply"
+  },
+  {
+    "question": "For how long did the Berlin airlift keep the western sectors supplied?",
+    "options": [
+      "About eleven months",
+      "About three months",
+      "About two years",
+      "About six weeks"
+    ],
+    "correct": 0,
+    "explanation": "From June 1948 to May 1949, with an aircraft landing every few minutes at the peak. The length is your evidence. This was not a gesture: a city was fed entirely by air for most of a year. Underestimate it and you underestimate what the West would do.",
+    "id": 14,
+    "slot": 14,
+    "section": "The Berlin crises",
+    "tier": "Recall"
+  },
+  {
+    "question": "Why is the Berlin airlift described as a defeat for Stalin?",
+    "options": [
+      "He bet the West would leave, and instead handed it a public victory",
+      "Soviet forces were beaten in fighting around the edges of West Berlin",
+      "He was forced to accept the new Western currency across the whole city",
+      "The United Nations condemned the blockade and ordered him to lift it"
+    ],
+    "correct": 0,
+    "explanation": "Nobody fired a shot, and that is the point for you. The blockade was meant to make the West withdraw. Instead it produced eleven months of Western aircraft feeding Berliners in front of the world's cameras. Option {opt1} invents fighting that never happened, which a marker will spot at once.",
+    "id": 15,
+    "slot": 15,
+    "section": "The Berlin crises",
+    "tier": "Understand"
+  },
+  {
+    "question": "A learner writes: 'The brain drain happened because of the Berlin Wall.' What is the error?",
+    "options": [
+      "The brain drain caused the Wall, so the learner has it back to front",
+      "The brain drain happened in West Germany rather than in East Germany at all",
+      "The brain drain was a Soviet policy of moving skilled workers eastward",
+      "The brain drain only began several years after the Wall had been completed"
+    ],
+    "correct": 0,
+    "explanation": "Cause and effect are reversed here, and this is the commonest error in the whole Berlin topic. Three million people leaving is what made the Wall necessary from the East German side. Get the order wrong and your explanation of 1961 has no cause in it at all.",
+    "id": 16,
+    "slot": 16,
+    "section": "The Berlin crises",
+    "tier": "Apply"
+  },
+  {
+    "question": "Which interpretation blames American economic power and the atomic bomb?",
+    "options": [
+      "The revisionist view",
+      "The orthodox view",
+      "The post-revisionist view",
+      "The traditional view"
+    ],
+    "correct": 0,
+    "explanation": "The revisionist view, which grew in America during the Vietnam war. Option {opt1} is its opposite and blames Soviet expansion. You are not required to agree with any of them. A marker does expect you to name the one you are arguing and defend it.",
+    "id": 17,
+    "slot": 17,
+    "section": "Who was to blame",
+    "tier": "Understand"
+  },
+  {
+    "question": "A learner writes: 'The post-revisionist view proves that nobody was to blame.' What is the error?",
+    "options": [
+      "It is an interpretation rather than a proof, and it blames both sides",
+      "The post-revisionist view actually blames the Soviet Union most of all",
+      "The post-revisionist view was abandoned by historians during the late 1970s",
+      "There is no such thing as a post-revisionist view of the Cold War"
+    ],
+    "correct": 0,
+    "explanation": "Two problems in one sentence. An interpretation is an argument from evidence, not a proof. Post-revisionists blame both sides rather than neither. Write that a view proves something and a marker sees you treating history as settled. The whole question is which case you can argue.",
+    "id": 18,
+    "slot": 18,
+    "section": "Who was to blame",
+    "tier": "Apply"
+  }
+];
+
+const TIER_MAP = {
+  Recall: { cls: 'chip-recall', label: 'Recall' },
+  Understand: { cls: 'chip-understand', label: 'Understand' },
+  Apply: { cls: 'chip-apply', label: 'Apply' }
+};
+const LEVELS = ['Recall','Understand','Apply'];
+
+// MODE is baked at build time: 'a' = Check 1 (before), 'b' = Check 2 (after).
+const IS_AFTER = (typeof MODE !== 'undefined' && MODE === 'b');
+
+// Read an optional prior score passed by the platform: ?prior=N
+function priorScore(){
+  try {
+    const p = new URLSearchParams(window.location.search).get('prior');
+    if(p === null) return null;
+    const n = parseInt(p, 10);
+    return (Number.isFinite(n) && n >= 0 && n <= 18) ? n : null;
+  } catch(e){ return null; }
+}
+
+// Intro copy differs by sitting.
+document.getElementById('intro-body').textContent = INTRO;
+
+const state = { filter: 'all', list: [], current: 0, answers: {}, order: {} };
+
+const menu = document.getElementById('menu-screen');
+const quiz = document.getElementById('quiz-screen');
+const review = document.getElementById('review-screen');
+
+function roman(n){ const m=[[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']]; let r=''; for(const [v,s] of m){ while(n>=v){ r+=s; n-=v; } } return r; }
+
+function buildMenu(){
+  const list = document.getElementById('section-list');
+  list.innerHTML = '';
+  SECTIONS.forEach((sec, i) => {
+    const count = QUESTIONS.filter(q => q.section === sec).length;
+    const btn = document.createElement('button');
+    btn.className = 'section-btn';
+    btn.innerHTML = `<span class="section-roman">${roman(i+2)}.</span><span class="section-name">${sec}</span><span class="section-count">${count} Q</span>`;
+    btn.addEventListener('click', () => startQuiz(sec));
+    list.appendChild(btn);
+  });
+  document.querySelector('[data-filter="all"]').addEventListener('click', () => startQuiz('all'));
+}
+
+function startQuiz(filter){
+  state.filter = filter;
+  state.list = filter === 'all' ? QUESTIONS.slice() : QUESTIONS.filter(q => q.section === filter);
+  state.current = 0; state.answers = {}; state.order = {};
+  menu.classList.add('hidden'); review.classList.add('hidden'); quiz.classList.remove('hidden');
+  renderQuestion();
+}
+
+// Resolve {optN} tokens to the letter that content-option N carries after shuffling.
+// Returns plain text (letters only), so textContent stays safe.
+function resolveOpts(text, order){
+  if(!text) return text;
+  return text.replace(/\{opt(\d+)\}/g, (m, n) => {
+    const displayPos = order.indexOf(parseInt(n, 10));
+    return displayPos >= 0 ? String.fromCharCode(65 + displayPos) : m;
+  });
+}
+
+function shuffledOrder(q){
+  if(!state.order[q.id]){
+    const arr = q.options.map((_,i)=>i);
+    for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); const t=arr[i]; arr[i]=arr[j]; arr[j]=t; }
+    state.order[q.id]=arr;
+  }
+  return state.order[q.id];
+}
+
+function renderQuestion(){
+  const q = state.list[state.current];
+  const answered = state.answers[q.id] !== undefined;
+  const diff = TIER_MAP[q.tier];
+  document.getElementById('quiz-section-name').textContent = state.filter === 'all' ? 'Full test' : q.section;
+  document.getElementById('quiz-progress').textContent = `Question ${state.current+1} of ${state.list.length}`;
+  document.getElementById('progress-fill').style.width = ((state.current+1)/state.list.length*100)+'%';
+  document.getElementById('section-tag').textContent = q.section;
+  const chip = document.getElementById('difficulty-chip');
+  chip.className = 'chip ' + diff.cls; chip.textContent = diff.label;
+  document.getElementById('question-text').textContent = q.question;
+
+  const order = shuffledOrder(q);
+  const cont = document.getElementById('options-container');
+  cont.innerHTML = '';
+  order.forEach((orig, pos) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    let mark = '';
+    if(answered){
+      btn.disabled = true;
+      if(orig === q.correct){ btn.classList.add('correct'); mark = '<span class="opt-mark">&#10003;</span>'; }
+      else if(orig === state.answers[q.id]){ btn.classList.add('wrong'); mark = '<span class="opt-mark">&#10007;</span>'; }
+      else btn.classList.add('dimmed');
+    }
+    btn.innerHTML = `<span class="opt-letter">${String.fromCharCode(65+pos)}</span><span class="opt-text">${q.options[orig]}</span>${mark}`;
+    if(!answered){ btn.addEventListener('click', () => { state.answers[q.id] = orig; renderQuestion(); }); }
+    cont.appendChild(btn);
+  });
+
+  const expl = document.getElementById('explanation');
+  if(answered){
+    expl.classList.remove('hidden');
+    document.getElementById('expl-text').textContent = resolveOpts(q.explanation, order);
+  }
+  else expl.classList.add('hidden');
+
+  // Back always does something: a step back inside the test, and from the first
+  // question it returns to the menu rather than sitting there dead.
+  const prevBtn = document.getElementById('prev-btn');
+  const atStart = state.current === 0;
+  prevBtn.disabled = false;
+  prevBtn.style.visibility = 'visible';
+  prevBtn.innerHTML = atStart ? '&larr; Back to menu' : '&larr; Previous';
+  const action = document.getElementById('action-btn');
+  action.textContent = state.current === state.list.length - 1 ? 'See results' : 'Next question';
+  action.disabled = !answered;
+
+  let got = 0, done = 0;
+  state.list.forEach(x => { if(state.answers[x.id] !== undefined){ done++; if(state.answers[x.id]===x.correct) got++; } });
+  document.getElementById('score-tally').textContent = `Score so far: ${got} / ${done}`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+document.getElementById('action-btn').addEventListener('click', () => {
+  if(state.current < state.list.length - 1){ state.current++; renderQuestion(); }
+  else showReview();
+});
+document.getElementById('prev-btn').addEventListener('click', () => {
+  if(state.current>0){ state.current--; renderQuestion(); }
+  else { document.getElementById('quiz-screen').classList.add('hidden');
+         document.getElementById('menu-screen').classList.remove('hidden');
+         window.scrollTo({top:0,behavior:'smooth'}); }
+});
+document.getElementById('exit-btn').addEventListener('click', () => { quiz.classList.add('hidden'); menu.classList.remove('hidden'); });
+document.getElementById('restart-btn').addEventListener('click', () => { review.classList.add('hidden'); menu.classList.remove('hidden'); });
+
+function weakestSection(){
+  let worst = SECTIONS[0], worstPct = 2;
+  SECTIONS.forEach(sec => {
+    const qs = state.list.filter(q => q.section === sec);
+    if(!qs.length) return;
+    const got = qs.filter(q => state.answers[q.id] === q.correct).length;
+    const p = got/qs.length;
+    if(p < worstPct){ worstPct = p; worst = sec; }
+  });
+  return worst;
+}
+
+function showReview(){
+  quiz.classList.add('hidden'); review.classList.remove('hidden');
+  const total = state.list.length;
+  let correct = 0;
+  state.list.forEach(q => { if(state.answers[q.id] === q.correct) correct++; });
+  const pct = total ? Math.round(correct/total*100) : 0;
+  document.getElementById('score-correct').textContent = correct;
+  document.getElementById('score-total').textContent = total;
+  document.getElementById('score-percent').textContent = pct;
+
+  // Word bands, not letters. Copy differs by sitting.
+  let band='', desc='';
+  const weakest = weakestSection();
+  if(IS_AFTER){
+    if(pct>=85){ band='Excellent'; desc='The facts have stuck. Your last step is to write the essay question out under timed conditions: one hour, three pages.'; }
+    else if(pct>=70){ band='Strong'; desc='Strong recall after the lessons. Look again at anything you missed, then write the essay out under time.'; }
+    else if(pct>=55){ band='Solid'; desc='A solid base. Your weakest area was ' + weakest + '. Go back to the lesson that covers it, then try the timed essay.'; }
+    else if(pct>=40){ band='Patchy'; desc='Some of it has stuck and some has not. Your weakest area was ' + weakest + '. Revisit that lesson, then take this again.'; }
+    else { band='Start again'; desc='The facts have not settled yet. Go back to the lessons, starting with ' + weakest + ', and work through them again before the exam.'; }
+  } else {
+    if(pct>=85){ band='Excellent'; desc='A strong start even before the lessons. Go to Lesson 1 and start turning these facts into an argument.'; }
+    else if(pct>=70){ band='Strong'; desc='You already know a lot of this. Go to Lesson 1, where you learn to use it.'; }
+    else if(pct>=55){ band='Solid'; desc='A decent base to build on. Go to Lesson 1 and start building the argument.'; }
+    else if(pct>=40){ band='Patchy'; desc='A normal starting point before studying a topic. Go to Lesson 1: that is exactly what it is for.'; }
+    else { band='Just starting'; desc='A low score before you have studied a topic is the normal place to begin, not a warning. Go straight to Lesson 1.'; }
+  }
+  document.getElementById('score-grade').textContent = band;
+  document.getElementById('grade-desc').textContent = desc;
+
+  // Check 1 tells the learner to note the score. Check 2 shows the comparison if we have it.
+  const cmp = document.getElementById('compare-line');
+  if(IS_AFTER){
+    const prior = priorScore();
+    if(prior !== null && state.filter === 'all'){
+      const diff = correct - prior;
+      const move = diff > 0 ? ('up ' + diff) : (diff < 0 ? ('down ' + (-diff)) : 'the same');
+      cmp.textContent = 'Before the lessons: ' + prior + ' out of 18. Now: ' + correct + ' out of 18. That is ' + move + '.';
+      cmp.classList.remove('hidden');
+    } else {
+      cmp.classList.add('hidden');
+    }
+  } else {
+    cmp.textContent = 'Write this score down. When you finish Lesson 5, the second check will compare against it.';
+    cmp.classList.remove('hidden');
+  }
+
+  const levelRows = document.getElementById('level-rows'); levelRows.innerHTML = '';
+  LEVELS.forEach(level => {
+    const qs = state.list.filter(q => q.tier === level);
+    if(!qs.length) return;
+    const got = qs.filter(q => state.answers[q.id] === q.correct).length;
+    const p = Math.round(got/qs.length*100);
+    levelRows.innerHTML += `<div class="breakdown-row"><div class="breakdown-name">${level}</div><div class="breakdown-bar"><div class="breakdown-fill" style="width:${p}%"></div></div><div class="breakdown-score">${got}/${qs.length}</div></div>`;
+  });
+
+  const rows = document.getElementById('breakdown-rows'); rows.innerHTML = '';
+  SECTIONS.forEach(sec => {
+    const qs = state.list.filter(q => q.section === sec);
+    if(!qs.length) return;
+    const got = qs.filter(q => state.answers[q.id] === q.correct).length;
+    const p = Math.round(got/qs.length*100);
+    rows.innerHTML += `<div class="breakdown-row"><div class="breakdown-name">${sec}</div><div class="breakdown-bar"><div class="breakdown-fill" style="width:${p}%"></div></div><div class="breakdown-score">${got}/${qs.length}</div></div>`;
+  });
+
+  const cards = document.getElementById('review-cards'); cards.innerHTML = '';
+  state.list.forEach((q, i) => {
+    const your = state.answers[q.id];
+    const right = your === q.correct;
+    const card = document.createElement('div');
+    card.className = 'review-card ' + (right ? 'got' : 'missed');
+    let inner = `<div class="review-q">${i+1}. ${q.question}</div>`;
+    if(right){
+      inner += `<div class="review-a right"><span class="lab">Correct:</span> ${q.options[q.correct]}</div>`;
+    } else {
+      inner += `<div class="review-a yours-wrong"><span class="lab">Your answer:</span> ${your!==undefined ? q.options[your] : 'not answered'}</div>`;
+      inner += `<div class="review-a right"><span class="lab">Correct:</span> ${q.options[q.correct]}</div>`;
+    }
+    card.innerHTML = inner;
+    cards.appendChild(card);
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+buildMenu();
+})();
+
+
+/* ---- MODE TOGGLE ---------------------------------------------------------
+   Injects its own button so there is no stray markup, and lives inside the
+   single script block so a first-to-last script extraction still parses. */
+(function(){
+  var NATIVE = "light";
+  try{ if(localStorage.getItem("kula-mode")==="alt"){ document.body.classList.add("alt"); } }catch(e){}
+  var SUN='<circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/>';
+  var MOON='<path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/>';
+  var b=document.getElementById("mode-toggle");
+  if(!b){
+    b=document.createElement("button");
+    b.className="mode-toggle"; b.id="mode-toggle"; b.type="button";
+    b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true" id="mode-icon"></svg><span id="mode-label"></span>';
+    document.body.appendChild(b);
+  }
+  var lab=document.getElementById("mode-label"), ic=document.getElementById("mode-icon");
+  function paint(){
+    var onAlt=document.body.classList.contains("alt");
+    var showing = onAlt ? (NATIVE==="dark" ? "light" : "dark") : NATIVE;
+    var offering = showing==="dark" ? "light" : "dark";
+    lab.textContent = offering==="light" ? "Light Mode" : "Dark Mode";
+    ic.innerHTML = offering==="light" ? SUN : MOON;
+    b.setAttribute("aria-pressed", onAlt ? "true" : "false");
+    b.setAttribute("aria-label", "Switch to " + offering + " mode");
+  }
+  b.addEventListener("click",function(){
+    var onAlt=document.body.classList.toggle("alt");
+    try{ localStorage.setItem("kula-mode", onAlt ? "alt" : "native"); }catch(e){}
+    paint();
+  });
+  paint();
+})();
+</script>
+</body>
+</html>
