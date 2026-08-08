@@ -318,6 +318,44 @@ body.alt .chip-interpret, body.alt .chip-weigh, body.alt .chip-evaluate,
 body.alt .chip-recall, body.alt .chip-understand, body.alt .chip-apply,
 body.alt .chip-instinct { color: #EDE4E2 !important; }
 
+
+/* ---- The sticky header at narrow widths ---------------------------------
+   .top-meta is a flex row with the unit eyebrow at one end and the step
+   counter at the other. Flex children default to min-width:auto, so at 360px
+   and below the eyebrow refuses to shrink and the counter lands on top of it.
+   Same construction as the level-score-bar bug. Desktop is untouched. */
+.top-meta { gap: 0.7rem !important; flex-wrap: nowrap !important; }
+.top-meta > * { min-width: 0 !important; }
+.top-meta #lesson-tag {
+  flex: 1 1 auto !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+.top-meta .top-count { flex: 0 0 auto !important; white-space: nowrap !important; }
+@media (max-width: 380px) {
+  .top-meta { font-size: 0.62rem !important; letter-spacing: 0.09em !important; }
+}
+
+
+/* ---- Tap target: the mode toggle ----------------------------------------
+   The engine renders it at 38px tall, below the 44px minimum, and it is the
+   control a learner reaches for in the dark. Raised here rather than in the
+   engine so it can ship without an engine change. */
+.mode-toggle {
+  min-height: 44px !important;
+  padding-top: 0.62rem !important;
+  padding-bottom: 0.62rem !important;
+  font-size: 0.66rem !important;
+}
+@media (max-width: 520px) {
+  .mode-toggle {
+    min-height: 44px !important;
+    padding: 0.62rem 0.7rem !important;
+    font-size: 0.64rem !important;
+  }
+}
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     min-height: 100vh;
