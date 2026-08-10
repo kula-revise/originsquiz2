@@ -5,31 +5,132 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>What Stuck | The Cold War: The Origins of the Cold War in Europe | Kula Revise</title>
 <style>
+  /* ============================================================
+     KULA SOURCE ENGINE v3: TOKEN CONTRACT
+     This file is fixed mechanism. Do not edit it per series.
+     A skin sets the THIRTEEN identity variables in the block below
+     and nothing else is required of it.
+
+     Two accents, split by job:
+       --a1  accent one: navigation, progress, emphasis, option letters,
+             the primary button, the story date. The "structure" accent.
+       --a2  accent two: anything the learner earned. Correct answers,
+             the running summary, breakdown bars, key facts, the last
+             story line. The "reward" accent.
+     Set --a1-rgb / --a2-rgb to the SAME colours as r,g,b (no #), because
+     the tints, washes and shadows are built from them.
+     ============================================================ */
+
   :root {
-    --sand: #F2E9D9; --paper: #FBF6EB; --cut: #FFFCF4; --ink: #1B2A33;
-    --a1: #B4622D;         /* copper, accent one: nav, emphasis, option letters, progress */
-    --a2: #1F6B58;         /* malachite, accent two: earned, correct, band, breakdown */
-    --copper: var(--a1); --malachite: var(--a2);   /* aliases so existing rules inherit the split */
-    --clay: #8C4A2F; --fade: #7B7263;
+    /* ---- THE IDENTITY CONTRACT. A skin overrides these thirteen. ---- */
+    --sand:  #F2E9D9;   /* page background */
+    --paper: #FBF6EB;   /* cards */
+    --cut:   #FFFCF4;   /* insets, sources, carousels */
+    --ink:   #1B2A33;   /* body text */
+    --clay:  #8C4A2F;   /* stage tags, quiet labels */
+    --fade:  #7B7263;   /* muted text, captions */
+    --a1: #B4622D;   --a1-rgb: 180,98,45;
+    --a2: #1F6B58;   --a2-rgb: 31,107,88;
     --serif: Georgia, 'Times New Roman', serif;
     --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --mono: ui-monospace, 'Cascadia Code', Consolas, 'Courier New', monospace;
+
+    /* ---- DERIVED TOKENS. A skin should not need to touch these. ----
+       They exist because the engine used to hardcode fourteen literal
+       colours, which is what made every glossary definition and every
+       source expander invisible in dark mode. Everything below now
+       tracks the identity variables above, so a skin that sets --fade
+       and --ink correctly gets a readable dark mode for free. ---- */
+    --muted:      var(--fade);          /* secondary body text: kt-def, toggle-body, disc-body, cover-line */
+    --hair:       rgba(0,0,0,0.12);     /* progress track, quiet rules */
+    --hair-strong:rgba(0,0,0,0.28);     /* dashed divider inside an expander */
+    --on-ink:     var(--paper);         /* text sitting on an --ink ground */
+    --on-a1:      var(--paper);         /* text sitting on an --a1 ground */
+    --on-a2:      var(--paper);         /* text sitting on an --a2 ground */
+    --ink-deep:   #12202a;              /* --ink one step darker, button hover */
+    --a2-deep:    #164C3F;              /* --a2 one step darker, button hover */
+    --ok-bg:      rgba(var(--a2-rgb),0.13);  /* a correct option, a placed item */
+    --no-bg:      rgba(140,74,47,0.13);      /* a wrong option, a misplaced item */
+    /* Skill chips. a = the entry-level skill (Extract, Argue, Evidence, Recall).
+       b = the middle skill (Interpret, Understand). c = unassessed instinct.
+       The top skill (Evaluate, Weigh, Apply) sits on a solid accent ground. */
+    --chip-a-bg: rgba(var(--a1-rgb),0.16);  --chip-a-fg: var(--a1);
+    --chip-b-bg: rgba(var(--a2-rgb),0.16);  --chip-b-fg: var(--a2);
+    --chip-c-bg: rgba(0,0,0,0.06);
+    --scrim:  rgba(27,42,51,0.5);       /* modal backdrop */
+    --inset:  rgba(255,255,255,0.4);    /* sort column well */
+
+    /* Legacy aliases. Older skins and the quiz shell reference these. */
+    --copper: var(--a1);
+    --malachite: var(--a2);
   }
 
-  /* Mode toggle, fixed bottom right. The skin supplies body.alt. */
+  /* ---- DARK MODE TOKEN RE-POINT ---------------------------------------
+     The skin supplies body.alt values for the thirteen identity variables.
+     Everything derived re-points here, once, for every unit. This is the
+     engine-level fix for the three defects logged in MOBILE_FIXES_HANDOVER:
+     a skin no longer needs the patch block at all.
+     ------------------------------------------------------------------- */
+  body.alt {
+    --muted:      var(--fade);
+    --hair:       rgba(255,255,255,0.14);
+    --hair-strong:rgba(255,255,255,0.26);
+    --on-ink:     var(--sand);
+    --on-a1:      var(--sand);
+    --on-a2:      var(--sand);
+    --ink-deep:   var(--ink);
+    --a2-deep:    var(--a2);
+    --ok-bg:      rgba(var(--a2-rgb),0.20);
+    --no-bg:      rgba(var(--a1-rgb),0.18);
+    --chip-a-bg:  rgba(var(--a1-rgb),0.22);  --chip-a-fg: var(--ink);
+    --chip-b-bg:  rgba(var(--a2-rgb),0.22);  --chip-b-fg: var(--ink);
+    --chip-c-bg:  rgba(255,255,255,0.10);
+    --scrim:  rgba(0,0,0,0.62);
+    --inset:  rgba(255,255,255,0.05);
+  }
+  /* Key term chips keep a visible edge once the ground inverts. */
+  body.alt .kt-term { border-color: var(--hair-strong); }
+  body.alt .kt-term summary { color: var(--ink); }
+  body.alt .kt-label { border-top-color: var(--hair-strong); }
+  /* v2 dimmed the options a learner did not pick; at 0.45 they vanish on a dark ground. */
+  body.alt .option.dimmed, body.alt .option-btn.dimmed { opacity: 0.72; }
+
+  /* ---- MODE TOGGLE. Fixed bottom right, 44px minimum tap target. ---- */
   .mode-toggle {
     position: fixed; bottom: 0.9rem; right: 0.9rem; z-index: 40;
     display: flex; align-items: center; gap: 0.4rem;
     font-family: var(--sans); font-size: 0.66rem; font-weight: 700;
     letter-spacing: 0.12em; text-transform: uppercase;
-    padding: 0.55rem 0.75rem; min-height: 2.4rem;
+    padding: 0.62rem 0.75rem; min-height: 44px;
     background: var(--paper); color: var(--fade);
-    border: 1px solid rgba(0,0,0,0.18); cursor: pointer;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.16);
+    border: 1px solid var(--hair-strong); cursor: pointer;
+    box-shadow: 0 2px 12px var(--scrim);
   }
   .mode-toggle:hover { color: var(--ink); border-color: var(--a1); }
   .mode-toggle:focus-visible { outline: 2px solid var(--a1); outline-offset: 2px; }
   .mode-toggle svg { width: 0.9rem; height: 0.9rem; fill: none; stroke: currentColor; stroke-width: 1.6; }
+  @media (max-width: 520px) {
+    .mode-toggle { min-height: 44px; padding: 0.62rem 0.7rem; font-size: 0.64rem; }
+  }
   @media print { .mode-toggle { display: none; } }
+
+  /* ---- STICKY HEADER AT 360px --------------------------------------
+     .top-meta is a flex row and flex children default to min-width auto,
+     so at 360px the eyebrow and the step counter used to overlap. The
+     eyebrow now takes the free space and truncates rather than pushing
+     the counter off. Renders correctly at 375px and above either way,
+     which is why this was missed. 360 is common on mid-range Android.
+     ----------------------------------------------------------------- */
+  .top-meta { gap: 0.7rem; flex-wrap: nowrap; }
+  .top-meta > * { min-width: 0; }
+  .top-meta #lesson-tag, .top-meta .top-label {
+    flex: 1 1 auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .top-meta .top-count { flex: 0 0 auto; white-space: nowrap; }
+  @media (max-width: 380px) {
+    .top-meta { font-size: 0.62rem; letter-spacing: 0.09em; }
+  }
+
 /* COLD WAR ORIGINS: zone
    Checked against the identity register before designing. Vietnam holds cream
    paper and a serif on soft rounded cards. USA 1920s holds a near-black deco
@@ -68,9 +169,9 @@
   /* border red for structure, steel blue for reward */
   --a1: #A32B23;  --a1-rgb: 163,43,35;
   --a2: #2E5F8A;  --a2-rgb: 46,95,138;
-  --sans:  'Archivo Narrow', 'Archivo', 'Inter', system-ui, -apple-system, Arial, sans-serif;
-  --serif: 'Source Serif 4', 'Charter', Georgia, serif;
-  --mono:  var(--sans);
+  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --serif: Georgia, 'Times New Roman', serif;
+  --mono: ui-monospace, 'Cascadia Code', Consolas, 'Courier New', monospace;
 }
 
 /* Ground: the diagonal hatch of a disputed zone on a period map. */
@@ -301,30 +402,14 @@ body.alt .figure img { border-color: rgba(212,115,106,0.38) !important; filter: 
 body.alt .figure figcaption { border-top-color: var(--a1); }
 
 
-/* ---- DARK MODE: hardcoded body text -------------------------------------
-   The engine sets a literal dark grey on the key-terms definitions, the source
-   expander and the discussion body, so those blocks stay dark on a dark ground
-   and become unreadable when the toggle is switched. The chip labels have the
-   same problem. All of it is fixed here rather than in the engine. */
-body.alt .kt-def,
-body.alt .toggle-body,
-body.alt .disc-body,
-body.alt .cover-line { color: #D3D9DE !important; }
-body.alt .kt-term { border-color: rgba(231,235,238,0.22) !important; }
-body.alt .kt-term summary { color: var(--ink) !important; }
-body.alt .kt-label { border-top-color: rgba(231,235,238,0.22) !important; }
-body.alt .chip-argue, body.alt .chip-evidence, body.alt .chip-extract,
-body.alt .chip-interpret, body.alt .chip-weigh, body.alt .chip-evaluate,
-body.alt .chip-recall, body.alt .chip-understand, body.alt .chip-apply,
-body.alt .chip-instinct { color: #EDE4E2 !important; }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     min-height: 100vh;
     background:
-      repeating-linear-gradient(90deg, rgba(27,42,51,0.028) 0 1px, transparent 1px 5px),
-      radial-gradient(ellipse at top right, rgba(180,98,45,0.10) 0%, transparent 58%),
-      radial-gradient(ellipse at bottom left, rgba(31,107,88,0.09) 0%, transparent 58%),
+      repeating-linear-gradient(90deg, var(--hair) 0 1px, transparent 1px 5px),
+      radial-gradient(ellipse at top right, rgba(var(--a1-rgb),0.10) 0%, transparent 58%),
+      radial-gradient(ellipse at bottom left, rgba(var(--a2-rgb),0.09) 0%, transparent 58%),
       var(--sand);
     padding: 2rem 1rem 3rem;
     font-family: var(--serif);
@@ -336,7 +421,7 @@ body.alt .chip-instinct { color: #EDE4E2 !important; }
   .header-block::before {
     content: ""; position: absolute; z-index: 0; top: 0; left: 50%; transform: translateX(-50%);
     width: 260px; height: 92px; pointer-events: none;
-    background: repeating-radial-gradient(circle at 50% 100%, rgba(180,98,45,0.30) 0 2px, transparent 2px 15px);
+    background: repeating-radial-gradient(circle at 50% 100%, rgba(var(--a1-rgb),0.30) 0 2px, transparent 2px 15px);
     -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 92%);
     mask-image: linear-gradient(to bottom, #000 0%, transparent 92%);
   }
@@ -348,105 +433,111 @@ body.alt .chip-instinct { color: #EDE4E2 !important; }
       radial-gradient(circle at 9px 4.5px, var(--a1) 0 4px, transparent 4.5px),
       radial-gradient(circle at 46px 4.5px, var(--a1) 0 4px, transparent 4.5px),
       radial-gradient(circle at 83px 4.5px, var(--a1) 0 4px, transparent 4.5px); }
-  .intro-box { background: var(--paper); border: 1px solid rgba(27,42,51,0.12); border-left: 5px solid var(--malachite); padding: 1.4rem 1.6rem; margin-bottom: 2rem; }
-  .intro-label { font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--malachite); font-weight: 700; margin-bottom: 0.6rem; }
+  .intro-box { background: var(--paper); border: 1px solid var(--hair); border-left: 5px solid var(--a2); padding: 1.4rem 1.6rem; margin-bottom: 2rem; }
+  .intro-label { font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--a2); font-weight: 700; margin-bottom: 0.6rem; }
   .intro-text { line-height: 1.68; font-size: 1rem; }
   .key-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem; margin-bottom: 2.2rem; }
-  .key-item { display: flex; flex-direction: column; gap: 0.45rem; padding: 0.85rem; background: var(--paper); border: 1px solid rgba(27,42,51,0.1); }
+  .key-item { display: flex; flex-direction: column; gap: 0.45rem; padding: 0.85rem; background: var(--paper); border: 1px solid var(--hair); }
   .chip { font-family: var(--sans); display: inline-block; padding: 0.22rem 0.7rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; width: fit-content; }
-  .chip-recall { background: #E7D6C4; color: #7B3F1C; }
-  .chip-understand { background: #D6E3DB; color: #1B5445; }
-  .chip-apply { background: var(--ink); color: #F0E3CF; }
+  .chip-recall { background: var(--chip-a-bg); color: var(--chip-a-fg); }
+  .chip-understand { background: var(--chip-b-bg); color: var(--chip-b-fg); }
+  .chip-apply { background: var(--ink); color: var(--on-ink); }
   .key-desc { font-size: 0.83rem; color: var(--fade); }
   .sections-label { font-family: var(--sans); font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--fade); text-align: center; margin-bottom: 1.2rem; font-weight: 700; }
-  .primary-btn { font-family: var(--sans); width: 100%; display: flex; align-items: center; gap: 1rem; padding: 1.3rem 1.5rem; background: var(--ink); color: #F4EADA; border: none; cursor: pointer; font-family: inherit; text-align: left; transition: all 0.2s; margin-bottom: 1rem; }
-  .primary-btn:hover { background: #12202a; transform: translateX(4px); }
-  .btn-num { font-family: var(--sans); font-size: 1.4rem; color: var(--copper); font-weight: 800; min-width: 35px; }
+  .primary-btn { font-family: var(--sans); width: 100%; display: flex; align-items: center; gap: 1rem; padding: 1.3rem 1.5rem; background: var(--ink); color: var(--on-ink); border: none; cursor: pointer; font-family: inherit; text-align: left; transition: all 0.2s; margin-bottom: 1rem; }
+  .primary-btn:hover { background: var(--ink-deep); transform: translateX(4px); }
+  .btn-num { font-family: var(--sans); font-size: 1.4rem; color: var(--a1); font-weight: 800; min-width: 35px; }
   .btn-txt { flex: 1; display: flex; flex-direction: column; gap: 0.2rem; }
   .btn-title { font-family: var(--sans); font-size: 1.15rem; font-weight: 700; }
-  .btn-sub { font-family: var(--sans); font-size: 0.82rem; color: #cbb9a0; }
-  .btn-arrow { font-size: 1.3rem; color: var(--copper); }
+  .btn-sub { font-family: var(--sans); font-size: 0.82rem; color: var(--muted); }
+  .btn-arrow { font-size: 1.3rem; color: var(--a1); }
   .section-list { display: flex; flex-direction: column; gap: 0.5rem; }
-  .section-btn { display: flex; align-items: center; gap: 1rem; padding: 0.95rem 1.1rem; background: transparent; border: 1px solid rgba(27,42,51,0.2); cursor: pointer; font-family: inherit; text-align: left; transition: all 0.2s; color: var(--ink); }
-  .section-btn:hover { background: var(--paper); border-color: var(--copper); }
-  .section-roman { font-family: var(--sans); color: var(--copper); font-weight: 800; min-width: 35px; font-size: 0.95rem; }
+  .section-btn { display: flex; align-items: center; gap: 1rem; padding: 0.95rem 1.1rem; background: transparent; border: 1px solid var(--hair-strong); cursor: pointer; font-family: inherit; text-align: left; transition: all 0.2s; color: var(--ink); }
+  .section-btn:hover { background: var(--paper); border-color: var(--a1); }
+  .section-roman { font-family: var(--sans); color: var(--a1); font-weight: 800; min-width: 35px; font-size: 0.95rem; }
   .section-name { flex: 1; font-size: 0.95rem; }
   .section-count { font-size: 0.78rem; color: var(--fade); letter-spacing: 0.05em; }
-  .footer { text-align: center; font-size: 0.79rem; color: var(--fade); margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(27,42,51,0.14); line-height: 1.6; }
+  .footer { text-align: center; font-size: 0.79rem; color: var(--fade); margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--hair); line-height: 1.6; }
 
   .quiz-top { margin-bottom: 1.5rem; }
-  .quiz-eyebrow { font-family: var(--sans); display: flex; justify-content: space-between; align-items: baseline; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--malachite); font-weight: 700; margin-bottom: 0.55rem; gap: 1rem; }
+  .quiz-eyebrow { font-family: var(--sans); display: flex; justify-content: space-between; align-items: baseline; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--a2); font-weight: 700; margin-bottom: 0.55rem; gap: 1rem; }
   .quiz-progress { color: var(--fade); font-weight: 500; letter-spacing: 0.04em; text-transform: none; }
-  .progress-track { height: 3px; background: rgba(27,42,51,0.12); overflow: hidden; }
-  .progress-fill { height: 100%; background: var(--copper); transition: width 0.35s ease; }
-  .quiz-card { background: var(--paper); border: 1px solid rgba(27,42,51,0.12); border-left: 5px solid var(--copper); padding: 1.7rem 1.5rem; margin-bottom: 1.3rem; }
+  .progress-track { height: 3px; background: var(--hair); overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--a1); transition: width 0.35s ease; }
+  .quiz-card { background: var(--paper); border: 1px solid var(--hair); border-left: 5px solid var(--a1); padding: 1.7rem 1.5rem; margin-bottom: 1.3rem; }
   .quiz-meta { display: flex; gap: 0.6rem; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; }
   .section-tag { font-family: var(--sans); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--clay); font-weight: 700; }
   .question-text { font-size: 1.24rem; line-height: 1.4; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 1.3rem; }
   .options { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.2rem; }
-  .option-btn { display: flex; align-items: flex-start; gap: 0.85rem; padding: 1rem 1.05rem; background: var(--sand); border: 1px solid rgba(27,42,51,0.13); cursor: pointer; font-family: inherit; text-align: left; font-size: 0.97rem; line-height: 1.55; color: var(--ink); transition: all 0.18s; width: 100%; }
-  .option-btn:hover:not(:disabled) { background: var(--cut); border-color: var(--copper); }
+  .option-btn { display: flex; align-items: flex-start; gap: 0.85rem; padding: 1rem 1.05rem; background: var(--sand); border: 1px solid var(--hair); cursor: pointer; font-family: inherit; text-align: left; font-size: 0.97rem; line-height: 1.55; color: var(--ink); transition: all 0.18s; width: 100%; }
+  .option-btn:hover:not(:disabled) { background: var(--cut); border-color: var(--a1); }
   .option-btn:disabled { cursor: default; }
-  .option-btn.selected { background: var(--cut); border-color: var(--copper); border-width: 2px; padding: 0.94rem 0.99rem; }
-  .option-btn.correct { background: #E2EDE4; border-color: var(--malachite); border-width: 2px; padding: 0.94rem 0.99rem; }
-  .option-btn.wrong { background: #F2DDD3; border-color: var(--clay); border-width: 2px; padding: 0.94rem 0.99rem; }
+  .option-btn.selected { background: var(--cut); border-color: var(--a1); border-width: 2px; padding: 0.94rem 0.99rem; }
+  .option-btn.correct { background: var(--ok-bg); border-color: var(--a2); border-width: 2px; padding: 0.94rem 0.99rem; }
+  .option-btn.wrong { background: var(--no-bg); border-color: var(--clay); border-width: 2px; padding: 0.94rem 0.99rem; }
   .option-btn.dimmed { opacity: 0.48; }
-  .opt-letter { font-weight: 800; color: var(--copper); min-width: 1.1rem; }
+  body.alt .option-btn.dimmed { opacity: 0.72; }
+  .opt-letter { font-weight: 800; color: var(--a1); min-width: 1.1rem; }
   .opt-text { flex: 1; }
   .opt-mark { font-weight: 700; font-size: 1.1rem; }
-  .explanation { background: var(--cut); border: 1px solid rgba(27,42,51,0.12); border-left: 5px solid var(--malachite); padding: 1.15rem 1.2rem; margin-bottom: 0.3rem; }
-  .expl-label { font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--malachite); font-weight: 700; margin-bottom: 0.5rem; }
+  .explanation { background: var(--cut); border: 1px solid var(--hair); border-left: 5px solid var(--a2); padding: 1.15rem 1.2rem; margin-bottom: 0.3rem; }
+  .expl-label { font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--a2); font-weight: 700; margin-bottom: 0.5rem; }
   .expl-text { line-height: 1.68; font-size: 0.95rem; }
   .quiz-actions { display: flex; justify-content: space-between; gap: 0.8rem; margin-top: 1.2rem; }
-  .secondary-btn { padding: 0.8rem 1.2rem; background: transparent; border: 1px solid rgba(27,42,51,0.28); color: var(--ink); font-family: inherit; font-size: 0.92rem; font-weight: 600; cursor: pointer; }
+  .secondary-btn { padding: 0.8rem 1.2rem; background: transparent; border: 1px solid var(--hair-strong); color: var(--ink); font-family: inherit; font-size: 0.92rem; font-weight: 600; cursor: pointer; }
   .secondary-btn:hover:not(:disabled) { background: var(--paper); }
   .secondary-btn:disabled { opacity: 0.35; cursor: not-allowed; }
-  .primary-btn-small { padding: 0.85rem 1.5rem; background: var(--malachite); border: none; color: #F7F1E4; font-family: inherit; font-size: 0.95rem; cursor: pointer; font-weight: 700; }
-  .primary-btn-small:hover:not(:disabled) { background: #164C3F; }
+  .primary-btn-small { padding: 0.85rem 1.5rem; background: var(--a2); border: none; color: var(--on-a2); font-family: inherit; font-size: 0.95rem; cursor: pointer; font-weight: 700; }
+  .primary-btn-small:hover:not(:disabled) { background: var(--a2-deep); }
   .primary-btn-small:disabled { opacity: 0.35; cursor: not-allowed; }
   .quiz-foot { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
   .link-btn { background: transparent; border: none; color: var(--fade); font-family: inherit; font-size: 0.85rem; cursor: pointer; text-decoration: underline; }
   .score-tally { font-size: 0.82rem; color: var(--fade); font-weight: 600; }
 
   .score-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.9rem; margin-bottom: 1.4rem; }
-  .score-block { background: var(--paper); border: 1px solid rgba(27,42,51,0.12); border-top: 4px solid var(--copper); padding: 1.3rem 0.8rem; text-align: center; }
+  .score-block { background: var(--paper); border: 1px solid var(--hair); border-top: 4px solid var(--a1); padding: 1.3rem 0.8rem; text-align: center; }
   .score-num { font-size: 2.6rem; font-weight: 800; color: var(--ink); line-height: 1; letter-spacing: -0.03em; }
   .score-num.red { color: var(--clay); }
   .score-den { font-size: 1.1rem; color: var(--fade); font-weight: 500; }
   .score-label { font-family: var(--sans); font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fade); margin-top: 0.5rem; font-weight: 700; }
-  .compare-line { text-align: center; font-weight: 700; color: var(--malachite); background: var(--paper); border: 1px solid rgba(31,107,88,0.25); padding: 0.9rem 1rem; margin-bottom: 1.5rem; }
+  .compare-line { text-align: center; font-weight: 700; color: var(--a2); background: var(--paper); border: 1px solid rgba(var(--a2-rgb),0.25); padding: 0.9rem 1rem; margin-bottom: 1.5rem; }
   .score-word { font-family: var(--sans); font-size: 1.3rem; font-weight: 800; color: var(--a2); line-height: 2; letter-spacing: -0.01em; }
   .grade-desc { text-align: center; margin-bottom: 1.6rem; padding: 0 0.5rem; line-height: 1.65; }
-  .breakdown { background: var(--paper); border: 1px solid rgba(27,42,51,0.12); padding: 1.3rem; margin-bottom: 1.4rem; }
-  .breakdown-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--malachite); font-weight: 700; margin-bottom: 1rem; text-align: center; }
+  .breakdown { background: var(--paper); border: 1px solid var(--hair); padding: 1.3rem; margin-bottom: 1.4rem; }
+  .breakdown-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--a2); font-weight: 700; margin-bottom: 1rem; text-align: center; }
   .breakdown-row { display: grid; grid-template-columns: 1fr 96px 44px; gap: 0.7rem; align-items: center; margin-bottom: 0.7rem; font-size: 0.86rem; }
   .breakdown-name { font-weight: 600; }
-  .breakdown-bar { height: 9px; background: rgba(27,42,51,0.08); overflow: hidden; }
-  .breakdown-fill { height: 100%; background: var(--copper); transition: width 0.4s; }
+  .breakdown-bar { height: 9px; background: var(--hair); overflow: hidden; }
+  .breakdown-fill { height: 100%; background: var(--a1); transition: width 0.4s; }
   .breakdown-score { color: var(--fade); text-align: right; font-weight: 700; }
   .review-all-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fade); font-weight: 700; margin-bottom: 1rem; text-align: center; }
-  .review-card { background: var(--paper); border: 1px solid rgba(27,42,51,0.12); padding: 1.1rem 1.2rem; margin-bottom: 0.8rem; border-left: 4px solid var(--fade); }
-  .review-card.got { border-left-color: var(--malachite); }
+  .review-card { background: var(--paper); border: 1px solid var(--hair); padding: 1.1rem 1.2rem; margin-bottom: 0.8rem; border-left: 4px solid var(--fade); }
+  .review-card.got { border-left-color: var(--a2); }
   .review-card.missed { border-left-color: var(--clay); }
   .review-q { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.5rem; line-height: 1.4; }
   .review-a { font-size: 0.88rem; line-height: 1.55; margin-bottom: 0.3rem; }
   .review-a .lab { font-weight: 700; }
   .review-a.yours-wrong { color: var(--clay); }
-  .review-a.right { color: var(--malachite); }
+  .review-a.right { color: var(--a2); }
   .review-actions { margin-top: 1.6rem; }
   .hidden { display: none !important; }
 
-#kula-mode-toggle, .mode-toggle { min-height: 44px !important; padding-top: 0.6rem !important; padding-bottom: 0.6rem !important; box-sizing: border-box !important; }
 
-/* dark/light button legibility (measured) */
-.primary-btn .btn-num, .primary-btn .btn-arrow { color: #E08A82 !important; }
-body.alt .section-btn, body.alt .section-btn .btn-num, body.alt .section-btn .btn-txt, body.alt .section-btn .btn-title, body.alt .section-btn .btn-sub, body.alt .section-btn .btn-arrow { color: #E7EBEE !important; }
+  /* v2.1 finish pop-up, matched to the lesson engine so a learner meets the
+     same closing screen in all seven files of a unit. */
+  .pop-back { position: fixed; inset: 0; background: var(--scrim); display: flex;
+    align-items: center; justify-content: center; padding: 1.2rem; z-index: 90; }
+  .pop { background: var(--paper); border: 1px solid var(--hair); max-width: 26rem;
+    width: 100%; padding: 1.4rem 1.3rem; text-align: center; }
+  .pop-label { font-family: var(--sans); font-size: 0.62rem; letter-spacing: 0.15em;
+    text-transform: uppercase; font-weight: 700; color: var(--a1); }
+  .pop-text { font-size: 0.95rem; line-height: 1.6; color: var(--ink); margin: 0.5rem 0 1.1rem; }
+  .pop-btn { font-family: var(--sans); font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.09em; text-transform: uppercase; min-height: 44px; padding: 0.6rem 1.4rem;
+    cursor: pointer; background: transparent; color: var(--muted);
+    border: 1px solid var(--hair); border-radius: 0; }
+  .review-actions { display: grid; gap: 0.7rem; }
 
-/* cw-sectbtn-op */
-body.alt button.section-btn, body.alt .section-btn, body.alt .section-btn > *, body.alt .section-btn .btn-num, body.alt .section-btn .btn-title, body.alt .section-btn .btn-sub { color: #E7EBEE !important; opacity: 1 !important; }
-
-/* cw-sect-dark */
-body.alt .section-btn.section-btn.section-btn, body.alt .section-btn.section-btn.section-btn .btn-num, body.alt .section-btn.section-btn.section-btn .btn-title, body.alt .section-btn.section-btn.section-btn .btn-sub { color: #E7EBEE !important; }
 </style>
 </head>
 <body>
@@ -470,10 +561,10 @@ body.alt .section-btn.section-btn.section-btn, body.alt .section-btn.section-btn
       <div class="key-item"><span class="chip chip-apply">Apply</span><span class="key-desc">Spot what is wrong with a claim</span></div>
     </div>
     <div>
-      <div class="sections-label">&mdash; Choose what to answer &mdash;</div>
+      <div class="sections-label">Choose what to answer</div>
       <button class="primary-btn" data-filter="all">
         <span class="btn-num">I.</span>
-        <span class="btn-txt"><span class="btn-title">Full check</span><span class="btn-sub">All 18 questions &middot; all five sections</span></span>
+        <span class="btn-txt"><span class="btn-title">Full check</span><span class="btn-sub">All 18 questions &middot; all 5 sections</span></span>
         <span class="btn-arrow">&rarr;</span>
       </button>
       <div class="section-list" id="section-list"></div>
@@ -522,6 +613,7 @@ body.alt .section-btn.section-btn.section-btn, body.alt .section-btn.section-btn
     <div><div class="review-all-label">Every question</div><div id="review-cards"></div></div>
     <div class="review-actions">
       <button class="primary-btn" id="restart-btn"><span class="btn-txt"><span class="btn-title">Return to menu</span><span class="btn-sub">Try another section or retake the full test</span></span><span class="btn-arrow">&#8635;</span></button>
+      <button class="primary-btn" id="finish-btn"><span class="btn-txt"><span class="btn-title">Finish</span><span class="btn-sub">Then tap Done to finish</span></span><span class="btn-arrow">&rarr;</span></button>
     </div>
   </div>
 </div>
@@ -529,11 +621,20 @@ body.alt .section-btn.section-btn.section-btn, body.alt .section-btn.section-btn
 <script>
 /* kula: re-entry guard. Every declaration below is function scoped, so a
    viewer that re-runs this script re-initialises instead of throwing a
-   redeclaration SyntaxError and leaving FLOW undefined. */
+   redeclaration SyntaxError. */
 (function(){
 const MODE = "b";
+const DONE_LABEL = "Unit complete";
+const DONE_TITLE = "What Stuck";
+const DONE_TEXT  = "Congratulations on completing The Origins of the Cold War in Europe. Come back here whenever you need to revise for a test or exam.";
 const INTRO = "Same eighteen facts as the check you took before Lesson 1, approached from the other side. This one measures what stuck rather than what you recognised. Enter your earlier score if you have it and the report will compare the two.";
-const SECTIONS = ["The alliance and what broke it", "Spheres of interest and the Iron Curtain", "Containment and the alliances", "The Berlin crises", "Who was to blame"];
+const SECTIONS = [
+  "The alliance and what broke it",
+  "Spheres of interest and the Iron Curtain",
+  "Containment and the alliances",
+  "The Berlin crises",
+  "Who was to blame"
+];
 const QUESTIONS = [
   {
     "question": "The Yalta Conference took place while which war was still being fought?",
@@ -559,7 +660,7 @@ const QUESTIONS = [
       "Woodrow Wilson"
     ],
     "correct": 0,
-    "explanation": "Franklin Roosevelt, who was dead nine weeks later. That gap is why Yalta and Potsdam feel like different worlds to you. Option {opt1} took over afterwards, and putting him at Yalta removes the change of leadership a marker is looking for.",
+    "explanation": "Franklin Roosevelt, who was dead nine weeks later. That gap is why Yalta and Potsdam feel like different worlds to you. Option {opt1} took over afterwards. Put him at Yalta and you delete the change of leadership that made Potsdam different.",
     "id": 2,
     "slot": 2,
     "section": "The alliance and what broke it",
@@ -589,7 +690,7 @@ const QUESTIONS = [
       "Britain was not represented at Potsdam at all, only at the Yalta talks"
     ],
     "correct": 0,
-    "explanation": "Britain voted mid-conference and Clement Attlee replaced Churchill at the table. Losing that detail costs you the point that Potsdam had two new faces out of three. Option {opt3} is the sort of overstatement that unravels an answer, and a marker reading it stops trusting anything else you say.",
+    "explanation": "Britain voted mid-conference and Clement Attlee replaced Churchill at the table. Losing that detail costs you the point that Potsdam had two new faces out of three. Option {opt3} is the sort of overstatement that unravels an answer. Claim too much once and the rest of your argument carries it.",
     "id": 4,
     "slot": 4,
     "section": "The alliance and what broke it",
@@ -634,7 +735,7 @@ const QUESTIONS = [
       "They chose communism freely and then allied themselves with Moscow"
     ],
     "correct": 0,
-    "explanation": "The word does a precise job: formally independent, actually steered from outside. Option {opt1} describes the three Baltic republics, which were annexed outright and are a different case. Use the terms interchangeably and a marker cannot tell whether you know the difference.",
+    "explanation": "The word does a precise job: formally independent, actually steered from outside. Option {opt1} describes the three Baltic republics, which were annexed outright and are a different case. Use the terms interchangeably and your answer cannot show that you know the difference.",
     "id": 7,
     "slot": 7,
     "section": "Spheres of interest and the Iron Curtain",
@@ -664,7 +765,7 @@ const QUESTIONS = [
       "Italy and France"
     ],
     "correct": 0,
-    "explanation": "Greece, where a civil war was being fought against communist guerrillas, and Turkey, which was under Soviet pressure. Britain had been paying for Greece and said in February 1947 that it could not any more. That is the trigger, and a marker wants you to name it.",
+    "explanation": "Greece, where a civil war was being fought against communist guerrillas, and Turkey, which was under Soviet pressure. Britain had been paying for Greece and said in February 1947 that it could not any more. That is the trigger, and the question is asking you to name it.",
     "id": 9,
     "slot": 9,
     "section": "Containment and the alliances",
@@ -679,7 +780,7 @@ const QUESTIONS = [
       "About 10 billion dollars"
     ],
     "correct": 0,
-    "explanation": "Seventeen billion over four years, requested in December 1947. Congress cut it by nearly a quarter before passing it, which tells you something real about American politics. Option {opt1} is what was actually spent, and confusing the two makes a marker doubt both figures.",
+    "explanation": "Seventeen billion over four years, requested in December 1947. Congress cut it by nearly a quarter before passing it, which tells you something real about American politics. Option {opt1} is what was actually spent. Confuse the two and neither figure is safe to use.",
     "id": 10,
     "slot": 10,
     "section": "Containment and the alliances",
@@ -694,7 +795,7 @@ const QUESTIONS = [
       "That the aid would be accepted right across the whole of Europe"
     ],
     "correct": 0,
-    "explanation": "Both said yes and both were overruled from Moscow, which told the West more about who governed them than any speech could. Option {opt1} is the opposite conclusion and the episode proves it wrong. Use this as your evidence of Soviet control and a marker will credit it.",
+    "explanation": "Both said yes and both were overruled from Moscow, which told the West more about who governed them than any speech could. Option {opt1} is the opposite conclusion and the episode proves it wrong. This is your hardest evidence of Soviet control, so use it.",
     "id": 11,
     "slot": 11,
     "section": "Containment and the alliances",
@@ -709,7 +810,7 @@ const QUESTIONS = [
       "The Berlin blockade had failed and Moscow needed a new way to apply pressure"
     ],
     "correct": 0,
-    "explanation": "A rearmed West Germany inside NATO was the specific trigger, ten years after German troops had last been in the Soviet Union. Option {opt3} is seven years too early. Treat NATO and the Pact as one moment and you lose the six-year gap that a marker is looking for.",
+    "explanation": "A rearmed West Germany inside NATO was the specific trigger, ten years after German troops had last been in the Soviet Union. Option {opt3} is seven years too early. Treat NATO and the Pact as one moment and you lose the six-year gap between them.",
     "id": 12,
     "slot": 12,
     "section": "Containment and the alliances",
@@ -754,7 +855,7 @@ const QUESTIONS = [
       "The United Nations condemned the blockade and ordered him to lift it"
     ],
     "correct": 0,
-    "explanation": "Nobody fired a shot, and that is the point for you. The blockade was meant to make the West withdraw. Instead it produced eleven months of Western aircraft feeding Berliners in front of the world's cameras. Option {opt1} invents fighting that never happened, which a marker will spot at once.",
+    "explanation": "Nobody fired a shot, and that is the point for you. The blockade was meant to make the West withdraw. Instead it produced eleven months of Western aircraft feeding Berliners in front of the world's cameras. Option {opt1} invents fighting that never happened.",
     "id": 15,
     "slot": 15,
     "section": "The Berlin crises",
@@ -784,7 +885,7 @@ const QUESTIONS = [
       "The traditional view"
     ],
     "correct": 0,
-    "explanation": "The revisionist view, which grew in America during the Vietnam war. Option {opt1} is its opposite and blames Soviet expansion. You are not required to agree with any of them. A marker does expect you to name the one you are arguing and defend it.",
+    "explanation": "The revisionist view, which grew in America during the Vietnam war. Option {opt1} is its opposite and blames Soviet expansion. You are not required to agree with any of them. You are expected to name the one you are arguing and defend it.",
     "id": 17,
     "slot": 17,
     "section": "Who was to blame",
@@ -799,14 +900,13 @@ const QUESTIONS = [
       "There is no such thing as a post-revisionist view of the Cold War"
     ],
     "correct": 0,
-    "explanation": "Two problems in one sentence. An interpretation is an argument from evidence, not a proof. Post-revisionists blame both sides rather than neither. Write that a view proves something and a marker sees you treating history as settled. The whole question is which case you can argue.",
+    "explanation": "Two problems in one sentence. An interpretation is an argument from evidence, not a proof. Post-revisionists blame both sides rather than neither. Write that a view proves something and you are treating an argument as settled. The whole question is which case you can argue.",
     "id": 18,
     "slot": 18,
     "section": "Who was to blame",
     "tier": "Apply"
   }
 ];
-
 const TIER_MAP = {
   Recall: { cls: 'chip-recall', label: 'Recall' },
   Understand: { cls: 'chip-understand', label: 'Understand' },
@@ -946,6 +1046,21 @@ document.getElementById('prev-btn').addEventListener('click', () => {
 document.getElementById('exit-btn').addEventListener('click', () => { quiz.classList.add('hidden'); menu.classList.remove('hidden'); });
 document.getElementById('restart-btn').addEventListener('click', () => { review.classList.add('hidden'); menu.classList.remove('hidden'); });
 
+/* v2.1. Every file in a unit now ends the same way: Finish, then a pop-up whose
+   only job is to tell the learner to tap the platform's Done control. The four
+   knowledge checks previously ended on the results screen with no instruction,
+   so two files in every seven closed differently from the other five. */
+document.getElementById('finish-btn').addEventListener('click', () => {
+  const back = document.createElement('div');
+  back.className = 'pop-back';
+  back.innerHTML = '<div class="pop"><div class="pop-label">' + DONE_LABEL +
+    '</div><h3 style="margin:.4rem 0 .2rem;font-size:1.05rem;">' + DONE_TITLE +
+    '</h3><div class="pop-text">' + DONE_TEXT +
+    '</div><button class="pop-btn" id="fin-ok">Done</button></div>';
+  document.body.appendChild(back);
+  document.getElementById('fin-ok').addEventListener('click', () => back.remove());
+});
+
 function weakestSection(){
   let worst = SECTIONS[0], worstPct = 2;
   SECTIONS.forEach(sec => {
@@ -1076,6 +1191,7 @@ buildMenu();
     paint();
   });
   paint();
+
 })();
 </script>
 </body>
