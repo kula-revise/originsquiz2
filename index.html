@@ -32,8 +32,8 @@
     --a1: #B4622D;   --a1-rgb: 180,98,45;
     --a2: #1F6B58;   --a2-rgb: 31,107,88;
     --serif: Georgia, 'Times New Roman', serif;
-    --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    --mono: ui-monospace, 'Cascadia Code', Consolas, 'Courier New', monospace;
+    --sans:  system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --mono:  var(--sans);
 
     /* ---- DERIVED TOKENS. A skin should not need to touch these. ----
        They exist because the engine used to hardcode fourteen literal
@@ -66,12 +66,12 @@
   }
 
   /* ---- DARK MODE TOKEN RE-POINT ---------------------------------------
-     The skin supplies body.alt values for the thirteen identity variables.
+     The skin supplies body.dark values for the thirteen identity variables.
      Everything derived re-points here, once, for every unit. This is the
      engine-level fix for the three defects logged in MOBILE_FIXES_HANDOVER:
      a skin no longer needs the patch block at all.
      ------------------------------------------------------------------- */
-  body.alt {
+  body.dark {
     --muted:      var(--fade);
     --hair:       rgba(255,255,255,0.14);
     --hair-strong:rgba(255,255,255,0.26);
@@ -89,11 +89,9 @@
     --inset:  rgba(255,255,255,0.05);
   }
   /* Key term chips keep a visible edge once the ground inverts. */
-  body.alt .kt-term { border-color: var(--hair-strong); }
-  body.alt .kt-term summary { color: var(--ink); }
-  body.alt .kt-label { border-top-color: var(--hair-strong); }
-  /* v2 dimmed the options a learner did not pick; at 0.45 they vanish on a dark ground. */
-  body.alt .option.dimmed, body.alt .option-btn.dimmed { opacity: 0.72; }
+  body.dark .kt-term { border-color: var(--hair-strong); }
+  body.dark .kt-term summary { color: var(--ink); }
+  body.dark .kt-label { border-top-color: var(--hair-strong); }
 
   /* ---- MODE TOGGLE. Fixed bottom right, 44px minimum tap target. ---- */
   .mode-toggle {
@@ -165,13 +163,19 @@
   --cut:   #E4E3DD;   /* insets, sources, carousels */
   --ink:   #1B1D1F;
   --clay:  #5A5F63;   /* stage tags, quiet labels */
-  --fade:  #83888C;
+  /* Muted text: captions, attributions, counters. The previous value measured 3.07
+     against the card ground and was the lightest of the four source skins. */
+  --fade:  #5E6367;
   /* border red for structure, steel blue for reward */
   --a1: #A32B23;  --a1-rgb: 163,43,35;
   --a2: #2E5F8A;  --a2-rgb: 46,95,138;
-  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --serif: Georgia, 'Times New Roman', serif;
-  --mono: ui-monospace, 'Cascadia Code', Consolas, 'Courier New', monospace;
+  /* The two hover steps are derived, not identity. Left in the engine block
+     they kept the engine's bottle green against this skin's steel blue. */
+  --ink-deep: #131516;
+  --a2-deep:  #214463;
+  --sans:  'Archivo Narrow', 'Archivo', 'Inter', system-ui, -apple-system, Arial, sans-serif;
+  --serif: 'Source Serif 4', 'Charter', Georgia, serif;
+  --mono:  var(--sans);
 }
 
 /* Ground: the diagonal hatch of a disputed zone on a period map. */
@@ -294,40 +298,45 @@ h1, h2, h3 {
 
 /* ---- DARK MODE ------------------------------------------------------------
    The hatch inverts to a blueprint negative rather than simply darkening. */
-body.alt {
+body.dark {
   --sand:  #14181C;
   --paper: #1C2228;
   --cut:   #232B32;
   --ink:   #E7EBEE;
   --clay:  #9EA9B2;
   --fade:  #8B959D;
-  --a1: #D4736A;  --a1-rgb: 212,115,106;
+  /* Lifted from #D4736A: it cleared 4.5 on the card ground but measured 4.42 on the
+     darker --cut inset, where the option letters and the rank numbers sit. */
+  --a1: #DA7E75;  --a1-rgb: 218,126,117;
   --a2: #6BA3D6;  --a2-rgb: 107,163,214;
+  /* On a dark ground a hover step goes lighter, not deeper. */
+  --ink-deep: #FFFFFF;
+  --a2-deep:  #96C0E6;
 }
-body.alt { background-image:
+body.dark { background-image:
   repeating-linear-gradient(45deg,
     transparent 0 9px, rgba(231,235,238,0.042) 9px 10px) !important; }
-body.alt .card, body.alt .stat-wrap, body.alt .carousel, body.alt .kt {
+body.dark .card, body.dark .stat-wrap, body.dark .carousel, body.dark .kt {
   border-top-color: var(--a1) !important; border-left-color: var(--a1) !important; }
-body.alt .source {
+body.dark .source {
   border-color: var(--a1) !important;
   background-image: repeating-linear-gradient(45deg,
     transparent 0 7px, rgba(212,115,106,0.09) 7px 8px) !important; }
-body.alt .stage-tag, body.alt .kt-label,
-body.alt .expl-label, body.alt .pop-label { background: rgba(212,115,106,0.22) !important; color: #F2C9C4 !important; }
-body.alt .source-attr { background: rgba(212,115,106,0.22) !important; color: #F2C9C4 !important; }
-body.alt .btn-begin { background: var(--a1) !important; border-color: var(--a1) !important; color: #14181C !important; }
-body.alt .btn-begin:hover { background: #E08A82 !important; border-color: #E08A82 !important; }
-body.alt .mode-toggle { background: var(--paper); border-color: rgba(231,235,238,0.24); }
-body.alt .rule, body.alt .cover-rule, body.alt .flourish, body.alt .story-rule {
+body.dark .stage-tag, body.dark .kt-label,
+body.dark .expl-label, body.dark .pop-label { background: rgba(212,115,106,0.22) !important; color: #F2C9C4 !important; }
+body.dark .source-attr { background: rgba(212,115,106,0.22) !important; color: #F2C9C4 !important; }
+body.dark .btn-begin { background: var(--a1) !important; border-color: var(--a1) !important; color: #14181C !important; }
+body.dark .btn-begin:hover { background: #E08A82 !important; border-color: #E08A82 !important; }
+body.dark .mode-toggle { background: var(--paper); border-color: rgba(231,235,238,0.24); }
+body.dark .rule, body.dark .cover-rule, body.dark .flourish, body.dark .story-rule {
   background-image:
     linear-gradient(90deg, var(--a1) 0 84px, transparent 84px 100%),
     repeating-linear-gradient(90deg, var(--a1) 84px 96px, transparent 96px 106px) !important; }
 
-body.alt .chip { background: rgba(212,115,106,0.16) !important; color: #F2C9C4 !important; }
-body.alt .chip-recall,     body.alt .chip-extract   { background: rgba(212,115,106,0.20) !important; color: #F5D2CD !important; }
-body.alt .chip-understand, body.alt .chip-interpret { background: rgba(107,163,214,0.20) !important; color: #C3DCF1 !important; }
-body.alt .chip-apply,      body.alt .chip-evaluate  { background: rgba(231,235,238,0.16) !important; color: #E7EBEE !important; }
+body.dark .chip { background: rgba(212,115,106,0.16) !important; color: #F2C9C4 !important; }
+body.dark .chip-recall,     body.dark .chip-extract   { background: rgba(212,115,106,0.20) !important; color: #F5D2CD !important; }
+body.dark .chip-understand, body.dark .chip-interpret { background: rgba(107,163,214,0.20) !important; color: #C3DCF1 !important; }
+body.dark .chip-apply,      body.dark .chip-evaluate  { background: rgba(231,235,238,0.16) !important; color: #E7EBEE !important; }
 
 
 /* ---- DARK MODE STATE COLOURS ----------------------------------------------
@@ -335,47 +344,46 @@ body.alt .chip-apply,      body.alt .chip-evaluate  { background: rgba(231,235,2
    they give pale text on pale grounds. Both .option and .option-btn are named,
    because the lesson engine and the quiz shell use different class names. */
 
-body.alt .option, body.alt .option-btn {
+body.dark .option, body.dark .option-btn {
   background: var(--cut) !important;
   border-color: rgba(231,235,238,0.20) !important;
   color: var(--ink) !important;
 }
-body.alt .option.selected, body.alt .option-btn.selected {
+body.dark .option.selected, body.dark .option-btn.selected {
   background: rgba(107,163,214,0.16) !important; border-color: #6BA3D6 !important; }
-body.alt .option.correct, body.alt .option-btn.correct {
+body.dark .option.correct, body.dark .option-btn.correct {
   background: rgba(107,163,214,0.20) !important;
   border-color: #6BA3D6 !important;
   color: var(--ink) !important;
 }
-body.alt .option.wrong, body.alt .option-btn.wrong {
+body.dark .option.wrong, body.dark .option-btn.wrong {
   background: rgba(212,115,106,0.18) !important;
   border-color: #D4736A !important;
   color: var(--ink) !important;
 }
-body.alt .option.correct .opt-text, body.alt .option-btn.correct .opt-text,
-body.alt .option.wrong   .opt-text, body.alt .option-btn.wrong   .opt-text { color: var(--ink) !important; }
-body.alt .option.correct .opt-letter, body.alt .option-btn.correct .opt-letter { color: #8FBEE4 !important; }
-body.alt .option.wrong   .opt-letter, body.alt .option-btn.wrong   .opt-letter { color: #E39A93 !important; }
-body.alt .option.dimmed, body.alt .option-btn.dimmed { opacity: 0.72 !important; }
-body.alt .opt-mark { color: var(--ink) !important; }
+body.dark .option.correct .opt-text, body.dark .option-btn.correct .opt-text,
+body.dark .option.wrong   .opt-text, body.dark .option-btn.wrong   .opt-text { color: var(--ink) !important; }
+body.dark .option.correct .opt-letter, body.dark .option-btn.correct .opt-letter { color: #8FBEE4 !important; }
+body.dark .option.wrong   .opt-letter, body.dark .option-btn.wrong   .opt-letter { color: #E39A93 !important; }
+body.dark .opt-mark { color: var(--ink) !important; }
 
-body.alt .primary-btn {
+body.dark .primary-btn {
   background: var(--cut) !important;
   border: 1px solid rgba(212,115,106,0.40) !important;
   color: var(--ink) !important;
 }
-body.alt .primary-btn:hover { background: #2C353D !important; }
-body.alt .primary-btn .btn-title { color: var(--ink) !important; }
-body.alt .primary-btn .btn-sub, body.alt .primary-btn .btn-arrow { color: var(--clay) !important; }
-body.alt .section-btn { border-color: rgba(231,235,238,0.18) !important; color: var(--ink) !important; }
-body.alt .section-btn:hover { background: var(--cut) !important; border-color: var(--a1) !important; }
-body.alt .primary-btn-small { background: var(--a1) !important; color: #14181C !important; }
-body.alt .primary-btn-small:hover:not(:disabled) { background: #E08A82 !important; }
-body.alt .secondary-btn { border-color: rgba(231,235,238,0.30) !important; color: var(--ink) !important; }
-body.alt .secondary-btn:hover:not(:disabled) { background: var(--cut) !important; }
-body.alt .explanation { background: var(--cut) !important; border-color: rgba(212,115,106,0.28) !important; }
-body.alt .expl-text { color: var(--ink) !important; }
-body.alt .quiz-foot, body.alt .quiz-foot a { color: var(--clay) !important; }
+body.dark .primary-btn:hover { background: #2C353D !important; }
+body.dark .primary-btn .btn-title { color: var(--ink) !important; }
+body.dark .primary-btn .btn-sub, body.dark .primary-btn .btn-arrow { color: var(--clay) !important; }
+body.dark .section-btn { border-color: rgba(231,235,238,0.18) !important; color: var(--ink) !important; }
+body.dark .section-btn:hover { background: var(--cut) !important; border-color: var(--a1) !important; }
+body.dark .primary-btn-small { background: var(--a1) !important; color: #14181C !important; }
+body.dark .primary-btn-small:hover:not(:disabled) { background: #E08A82 !important; }
+body.dark .secondary-btn { border-color: rgba(231,235,238,0.30) !important; color: var(--ink) !important; }
+body.dark .secondary-btn:hover:not(:disabled) { background: var(--cut) !important; }
+body.dark .explanation { background: var(--cut) !important; border-color: rgba(212,115,106,0.28) !important; }
+body.dark .expl-text { color: var(--ink) !important; }
+body.dark .quiz-foot, body.dark .quiz-foot a { color: var(--clay) !important; }
 
 
 /* The toggle is fixed bottom right and lands on Continue on a short viewport. */
@@ -398,8 +406,8 @@ body { padding-bottom: 4.5rem !important; }
   padding-top: 0.6rem;
 }
 .figure img { border: 1px solid rgba(163,43,35,0.35) !important; border-radius: 0 !important; }
-body.alt .figure img { border-color: rgba(212,115,106,0.38) !important; filter: brightness(0.9) contrast(1.02); }
-body.alt .figure figcaption { border-top-color: var(--a1); }
+body.dark .figure img { border-color: rgba(212,115,106,0.38) !important; filter: brightness(0.9) contrast(1.02); }
+body.dark .figure figcaption { border-top-color: var(--a1); }
 
 
 
@@ -449,8 +457,10 @@ body.alt .figure figcaption { border-top-color: var(--a1); }
   .btn-num { font-family: var(--sans); font-size: 1.4rem; color: var(--a1); font-weight: 800; min-width: 35px; }
   .btn-txt { flex: 1; display: flex; flex-direction: column; gap: 0.2rem; }
   .btn-title { font-family: var(--sans); font-size: 1.15rem; font-weight: 700; }
-  .btn-sub { font-family: var(--sans); font-size: 0.82rem; color: var(--muted); }
-  .btn-arrow { font-size: 1.3rem; color: var(--a1); }
+  /* These sit inside .primary-btn, whose light ground is --ink, so they take
+     --on-ink. On --muted and --a1 they were paper colours on near-black. */
+  .btn-sub { font-family: var(--sans); font-size: 0.82rem; color: var(--on-ink); opacity: 0.82; }
+  .btn-arrow { font-size: 1.3rem; color: var(--on-ink); }
   .section-list { display: flex; flex-direction: column; gap: 0.5rem; }
   .section-btn { display: flex; align-items: center; gap: 1rem; padding: 0.95rem 1.1rem; background: transparent; border: 1px solid var(--hair-strong); cursor: pointer; font-family: inherit; text-align: left; transition: all 0.2s; color: var(--ink); }
   .section-btn:hover { background: var(--paper); border-color: var(--a1); }
@@ -475,8 +485,10 @@ body.alt .figure figcaption { border-top-color: var(--a1); }
   .option-btn.selected { background: var(--cut); border-color: var(--a1); border-width: 2px; padding: 0.94rem 0.99rem; }
   .option-btn.correct { background: var(--ok-bg); border-color: var(--a2); border-width: 2px; padding: 0.94rem 0.99rem; }
   .option-btn.wrong { background: var(--no-bg); border-color: var(--clay); border-width: 2px; padding: 0.94rem 0.99rem; }
-  .option-btn.dimmed { opacity: 0.48; }
-  body.alt .option-btn.dimmed { opacity: 0.72; }
+  /* The dimmed state fell below readable contrast at 360px. One rule per mode,
+     and nothing later in the file competes with it. */
+  .option.dimmed, .option-btn.dimmed { opacity: 0.82; }
+  body.dark .option.dimmed, body.dark .option-btn.dimmed { opacity: 0.86; }
   .opt-letter { font-weight: 800; color: var(--a1); min-width: 1.1rem; }
   .opt-text { flex: 1; }
   .opt-mark { font-weight: 700; font-size: 1.1rem; }
@@ -523,16 +535,6 @@ body.alt .figure figcaption { border-top-color: var(--a1); }
   .hidden { display: none !important; }
 
 
-  /* v2.1 finish pop-up, matched to the lesson engine so a learner meets the
-     same closing screen in all seven files of a unit. */
-  .pop-back { position: fixed; inset: 0; background: var(--scrim); display: flex;
-    align-items: center; justify-content: center; padding: 1.2rem; z-index: 90; }
-  .pop { background: var(--paper); border: 1px solid var(--hair); max-width: 26rem;
-    width: 100%; padding: 1.4rem 1.3rem; text-align: center; }
-  .pop-label { font-family: var(--sans); font-size: 0.62rem; letter-spacing: 0.15em;
-    text-transform: uppercase; font-weight: 700; color: var(--a1); }
-  .pop-text { font-size: 0.95rem; line-height: 1.6; color: var(--ink); margin: 0.5rem 0 1.1rem; }
-  .pop-btn { font-family: var(--sans); font-size: 0.78rem; font-weight: 700;
     letter-spacing: 0.09em; text-transform: uppercase; min-height: 44px; padding: 0.6rem 1.4rem;
     cursor: pointer; background: transparent; color: var(--muted);
     border: 1px solid var(--hair); border-radius: 0; }
@@ -611,22 +613,39 @@ body.alt .figure figcaption { border-top-color: var(--a1); }
     <div class="breakdown"><div class="breakdown-label">By tier</div><div id="level-rows"></div></div>
     <div class="breakdown"><div class="breakdown-label">By section</div><div id="breakdown-rows"></div></div>
     <div><div class="review-all-label">Every question</div><div id="review-cards"></div></div>
+    <p class="grade-desc hidden" id="closing-line"></p>
     <div class="review-actions">
       <button class="primary-btn" id="restart-btn"><span class="btn-txt"><span class="btn-title">Return to menu</span><span class="btn-sub">Try another section or retake the full test</span></span><span class="btn-arrow">&#8635;</span></button>
-      <button class="primary-btn" id="finish-btn"><span class="btn-txt"><span class="btn-title">Finish</span><span class="btn-sub">Then tap Done to finish</span></span><span class="btn-arrow">&rarr;</span></button>
+      <button class="primary-btn" id="finish-btn"><span class="btn-txt"><span class="btn-title">Finish the unit</span><span class="btn-sub">Come back here whenever you need it</span></span><span class="btn-arrow">&rarr;</span></button>
     </div>
   </div>
 </div>
 
 <script>
+/* ---- LMS EMBED EVENTS ----------------------------------------------------
+   Two moments, deliberately separate. Reaching the closing screen marks the
+   activity done for progress tracking. Choosing to leave it advances. Firing
+   advance on arrival would pull the learner off their own results screen
+   before they had read it. ------------------------------------------------ */
+var KulaLMS = (function(){
+  var done = false;
+  function send(ev){
+    try{
+      window.parent.postMessage({ type: 'lms-embed-event', version: '1.0',
+        payload: { event: ev } }, '*');
+    }catch(e){}
+  }
+  return {
+    completed: function(){ if(done) return; done = true; send('completed'); },
+    advance:   function(){ send('advance'); }
+  };
+})();
 /* kula: re-entry guard. Every declaration below is function scoped, so a
    viewer that re-runs this script re-initialises instead of throwing a
    redeclaration SyntaxError. */
 (function(){
 const MODE = "b";
-const DONE_LABEL = "Unit complete";
-const DONE_TITLE = "What Stuck";
-const DONE_TEXT  = "Congratulations on completing The Origins of the Cold War in Europe. Come back here whenever you need to revise for a test or exam.";
+const CLOSING_TEXT = "Congratulations on completing The Origins of the Cold War in Europe. Come back here whenever you have a test or exam, or just need to consolidate your work.";
 const INTRO = "Same eighteen facts as the check you took before Lesson 1, approached from the other side. This one measures what stuck rather than what you recognised. Enter your earlier score if you have it and the report will compare the two.";
 const SECTIONS = [
   "The alliance and what broke it",
@@ -675,7 +694,7 @@ const QUESTIONS = [
       "It allowed the three powers to agree on a single government for Germany"
     ],
     "correct": 0,
-    "explanation": "The alliance was built on a shared enemy and nothing else, so beating that enemy removed its only foundation. Option {opt1} is the reverse of what happened, since the Red Army stayed exactly where it was. Get this the wrong way round and you cannot explain anything that follows.",
+    "explanation": "The three of them had one thing in common: Hitler. Beat him and there was nothing left holding them together. Option {opt1} says the opposite of what happened. The Red Army stayed exactly where it was. Get this the wrong way round and nothing that follows makes sense.",
     "id": 3,
     "slot": 3,
     "section": "The alliance and what broke it",
@@ -705,7 +724,7 @@ const QUESTIONS = [
       "Romania"
     ],
     "correct": 0,
-    "explanation": "Czechoslovakia, because it was the exception. The others had communist governments imposed while the Red Army stood there. This one had held a genuinely contested election in 1946. Option {opt1} matters to your answer too, and it is not the one that changed minds in the West.",
+    "explanation": "Czechoslovakia, because it was the exception. In the other countries the Red Army stood there while communist governments were put in place. Czechoslovakia had held a real election in 1946, with parties competing for votes. So when it fell, the West took it as proof. Option {opt1} matters to your answer too, but it is not the one that changed minds.",
     "id": 5,
     "slot": 5,
     "section": "Spheres of interest and the Iron Curtain",
@@ -720,7 +739,7 @@ const QUESTIONS = [
       "West Germany"
     ],
     "correct": 0,
-    "explanation": "Fulton is in Missouri, so he said it in America with Truman sitting behind him. That is the detail that gives the speech its weight, because the audience he needed was American. Option {opt1} is the obvious guess and it costs you the point about who he was trying to persuade.",
+    "explanation": "The United States. Fulton is in Missouri, and Truman was sitting behind him on the platform. That detail is what gives the speech its weight. The people Churchill needed to convince were Americans. Option {opt1} is the obvious guess, and it costs you the point about who he was talking to.",
     "id": 6,
     "slot": 6,
     "section": "Spheres of interest and the Iron Curtain",
@@ -735,7 +754,7 @@ const QUESTIONS = [
       "They chose communism freely and then allied themselves with Moscow"
     ],
     "correct": 0,
-    "explanation": "The word does a precise job: formally independent, actually steered from outside. Option {opt1} describes the three Baltic republics, which were annexed outright and are a different case. Use the terms interchangeably and your answer cannot show that you know the difference.",
+    "explanation": "On paper these countries were independent. They had their own flags, their own borders and their own governments. In practice those governments did what Moscow told them. Option {opt1} describes Estonia, Latvia and Lithuania, which were swallowed whole and stopped being countries. Use the two words as if they mean the same thing and you cannot show you know the difference.",
     "id": 7,
     "slot": 7,
     "section": "Spheres of interest and the Iron Curtain",
@@ -750,7 +769,7 @@ const QUESTIONS = [
       "Twenty"
     ],
     "correct": 0,
-    "explanation": "Eight, which is worth carrying because it makes the scale concrete for you. Option {opt1} is the number of Baltic republics annexed outright, so the two figures are easy to swap. Keep them apart and your answer on Soviet expansion has real evidence in it.",
+    "explanation": "Eight. It is worth carrying the number, because it shows the scale. Option {opt1} is how many Baltic republics were taken into the Soviet Union outright, so the two figures are easy to swap. Keep them apart and your answer on Soviet expansion has a real figure in it.",
     "id": 8,
     "slot": 8,
     "section": "Spheres of interest and the Iron Curtain",
@@ -780,7 +799,7 @@ const QUESTIONS = [
       "About 10 billion dollars"
     ],
     "correct": 0,
-    "explanation": "Seventeen billion over four years, requested in December 1947. Congress cut it by nearly a quarter before passing it, which tells you something real about American politics. Option {opt1} is what was actually spent. Confuse the two and neither figure is safe to use.",
+    "explanation": "Seventeen billion dollars over four years, asked for in December 1947. Congress cut it by nearly a quarter before it passed. Option {opt1} is what was actually spent in the end. Mix the two up and neither figure is safe to use.",
     "id": 10,
     "slot": 10,
     "section": "Containment and the alliances",
@@ -795,7 +814,7 @@ const QUESTIONS = [
       "That the aid would be accepted right across the whole of Europe"
     ],
     "correct": 0,
-    "explanation": "Both said yes and both were overruled from Moscow, which told the West more about who governed them than any speech could. Option {opt1} is the opposite conclusion and the episode proves it wrong. This is your hardest evidence of Soviet control, so use it.",
+    "explanation": "Both governments said yes. Both were then told no by Moscow. That told the West who was really running their foreign policy, and no speech could have shown it as clearly. Option {opt1} says the opposite, and this episode is what proves it wrong. It is your hardest piece of evidence for Soviet control, so use it.",
     "id": 11,
     "slot": 11,
     "section": "Containment and the alliances",
@@ -810,7 +829,7 @@ const QUESTIONS = [
       "The Berlin blockade had failed and Moscow needed a new way to apply pressure"
     ],
     "correct": 0,
-    "explanation": "A rearmed West Germany inside NATO was the specific trigger, ten years after German troops had last been in the Soviet Union. Option {opt3} is seven years too early. Treat NATO and the Pact as one moment and you lose the six-year gap between them.",
+    "explanation": "West Germany was let into NATO. German soldiers had been inside the Soviet Union ten years earlier, so the idea of a German army again alarmed Moscow. That is the trigger. Option {opt3} is seven years too early. Treat NATO and the Pact as one moment and you lose the six years between them.",
     "id": 12,
     "slot": 12,
     "section": "Containment and the alliances",
@@ -870,7 +889,7 @@ const QUESTIONS = [
       "The brain drain only began several years after the Wall had been completed"
     ],
     "correct": 0,
-    "explanation": "Cause and effect are reversed here, and this is the commonest error in the whole Berlin topic. Three million people leaving is what made the Wall necessary from the East German side. Get the order wrong and your explanation of 1961 has no cause in it at all.",
+    "explanation": "Cause and effect are the wrong way round here. It is the mistake people make most often in the Berlin topic. Three million people leaving is what made the Wall necessary from the East German side. Get the order wrong and your explanation of 1961 has no cause in it at all.",
     "id": 16,
     "slot": 16,
     "section": "The Berlin crises",
@@ -1046,20 +1065,9 @@ document.getElementById('prev-btn').addEventListener('click', () => {
 document.getElementById('exit-btn').addEventListener('click', () => { quiz.classList.add('hidden'); menu.classList.remove('hidden'); });
 document.getElementById('restart-btn').addEventListener('click', () => { review.classList.add('hidden'); menu.classList.remove('hidden'); });
 
-/* v2.1. Every file in a unit now ends the same way: Finish, then a pop-up whose
-   only job is to tell the learner to tap the platform's Done control. The four
-   knowledge checks previously ended on the results screen with no instruction,
-   so two files in every seven closed differently from the other five. */
-document.getElementById('finish-btn').addEventListener('click', () => {
-  const back = document.createElement('div');
-  back.className = 'pop-back';
-  back.innerHTML = '<div class="pop"><div class="pop-label">' + DONE_LABEL +
-    '</div><h3 style="margin:.4rem 0 .2rem;font-size:1.05rem;">' + DONE_TITLE +
-    '</h3><div class="pop-text">' + DONE_TEXT +
-    '</div><button class="pop-btn" id="fin-ok">Done</button></div>';
-  document.body.appendChild(back);
-  document.getElementById('fin-ok').addEventListener('click', () => back.remove());
-});
+/* The button at the end of the file is the thing that continues. It does not
+   point at a control somewhere else on the page. */
+document.getElementById('finish-btn').addEventListener('click', () => { KulaLMS.advance(); });
 
 function weakestSection(){
   let worst = SECTIONS[0], worstPct = 2;
@@ -1137,6 +1145,9 @@ function showReview(){
     rows.innerHTML += `<div class="breakdown-row"><div class="breakdown-name">${sec}</div><div class="breakdown-bar"><div class="breakdown-fill" style="width:${p}%"></div></div><div class="breakdown-score">${got}/${qs.length}</div></div>`;
   });
 
+  const closing = document.getElementById('closing-line');
+  if(CLOSING_TEXT){ closing.textContent = CLOSING_TEXT; closing.classList.remove('hidden'); }
+
   const cards = document.getElementById('review-cards'); cards.innerHTML = '';
   state.list.forEach((q, i) => {
     const your = state.answers[q.id];
@@ -1154,6 +1165,7 @@ function showReview(){
     cards.appendChild(card);
   });
   window.scrollTo({top:0,behavior:'smooth'});
+  KulaLMS.completed();
 }
 
 buildMenu();
@@ -1164,30 +1176,36 @@ buildMenu();
    Injects its own button so there is no stray markup, and lives inside the
    single script block so a first-to-last script extraction still parses. */
 (function(){
-  var NATIVE = "light";
-  try{ if(localStorage.getItem("kula-mode")==="alt"){ document.body.classList.add("alt"); } }catch(e){}
+  /* What is stored is the mode the learner chose, "light" or "dark". Never a
+     class name and never "native": neither describes anything on a unit built
+     the other way round. For an essay unit set NATIVE "dark", FLIP "light",
+     CLS "bright". Nothing else changes. */
+  var NATIVE = "light";   // the mode this unit is designed in
+  var FLIP   = "dark";    // the mode the toggle offers
+  var CLS    = "dark";    // the class that produces FLIP in this unit
+  try{ if(localStorage.getItem("kula-mode")===FLIP){ document.body.classList.add(CLS); } }catch(e){}
   var SUN='<circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/>';
   var MOON='<path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/>';
-  var b=document.getElementById("mode-toggle");
+  var b=document.getElementById("kula-mode-toggle");
   if(!b){
     b=document.createElement("button");
-    b.className="mode-toggle"; b.id="mode-toggle"; b.type="button";
+    b.className="mode-toggle"; b.id="kula-mode-toggle"; b.type="button";
     b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true" id="mode-icon"></svg><span id="mode-label"></span>';
     document.body.appendChild(b);
   }
   var lab=document.getElementById("mode-label"), ic=document.getElementById("mode-icon");
   function paint(){
-    var onAlt=document.body.classList.contains("alt");
-    var showing = onAlt ? (NATIVE==="dark" ? "light" : "dark") : NATIVE;
+    var flipped = document.body.classList.contains(CLS);
+    var showing = flipped ? FLIP : NATIVE;
     var offering = showing==="dark" ? "light" : "dark";
-    lab.textContent = offering==="light" ? "Light Mode" : "Dark Mode";
+    lab.textContent = offering==="light" ? "Light mode" : "Dark mode";
     ic.innerHTML = offering==="light" ? SUN : MOON;
-    b.setAttribute("aria-pressed", onAlt ? "true" : "false");
+    b.setAttribute("aria-pressed", showing==="dark" ? "true" : "false");
     b.setAttribute("aria-label", "Switch to " + offering + " mode");
   }
   b.addEventListener("click",function(){
-    var onAlt=document.body.classList.toggle("alt");
-    try{ localStorage.setItem("kula-mode", onAlt ? "alt" : "native"); }catch(e){}
+    var flipped=document.body.classList.toggle(CLS);
+    try{ localStorage.setItem("kula-mode", flipped ? FLIP : NATIVE); }catch(e){}
     paint();
   });
   paint();
