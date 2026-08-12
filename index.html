@@ -610,6 +610,117 @@ body.dark .inter-item.ok span, body.dark .inter-item.ok .rank { color: var(--on-
 /* The results bars measure what the learner earned, so they match. */
 .bd-fill { background: var(--ok) !important; }
 
+
+/* ============================================================
+   REVIEW FIXES
+   ============================================================ */
+
+/* ---- Correctness now reads on the sort and the order ---------
+   These two screens used to look the same after Check as before
+   it, because the only change was a pale tint. A tick or a cross
+   now sits on every placed item, and a wrong item in an order
+   question is told where it belonged.
+   ------------------------------------------------------------ */
+.inter-item { justify-content: flex-start; }
+.inter-body { flex: 1 1 auto; }
+.inter-mark { font-weight: 700; font-size: 1.1rem; margin-left: 0.6rem; flex: 0 0 auto; }
+.inter-item.ok .inter-mark { color: var(--on-ok) !important; }
+.inter-item.no {
+  background: var(--no-bg) !important;
+  border: 2px solid var(--a1) !important;
+}
+.inter-item.no .inter-mark, .inter-item.no .rank { color: var(--a1) !important; }
+.inter-should {
+  display: block; margin-top: 0.3rem;
+  font-family: var(--sans); font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--a1);
+}
+
+/* ---- The sort bins stop looking like drag targets -------------
+   A dashed border is the web's convention for drop me here, and
+   there is no drag and drop anywhere in the page. Solid hairline,
+   so the bins read as the containers they are.
+   ------------------------------------------------------------ */
+.sort-col { border-style: solid !important; }
+
+/* ---- Blue stops meaning five different things ----------------
+   The reward accent was carrying: the correct answer, a key term
+   you can open, the First pass label you cannot, the Continue
+   button, and the map annotations. The correct answer has already
+   moved to green. This separates the remaining two that matter:
+   a key term you can open keeps the accent and gains a dotted
+   underline, and an inline label that does nothing loses the
+   accent entirely and becomes ink.
+   ------------------------------------------------------------ */
+.card p > strong:first-child, .source p > strong:first-child { color: var(--ink) !important; }
+.kt-term > summary {
+  color: var(--a2);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+}
+
+/* ---- What a mark allocation means ----------------------------
+   (2 x 2) is exam notation and it is never explained anywhere in
+   the file. It is glossed once, on the first assessed question.
+   ------------------------------------------------------------ */
+.marks-gloss {
+  font-family: var(--sans); font-size: 0.74rem; line-height: 1.5;
+  color: var(--fade); margin: -0.3rem 0 0.9rem;
+  border-left: 2px solid var(--hair-strong); padding-left: 0.6rem;
+}
+
+
+/* ============================================================
+   THE MODE TOGGLE LEAVES THE READING COLUMN
+   It was fixed to the bottom right of the viewport, over a single
+   column layout, so on a phone it sat on top of whatever was
+   there: source text, an explanation, the Continue button. No
+   corner solves that, because at 390px the column is the whole
+   screen. The only real fix is to take it out of the content area
+   entirely, so it moves up into the header band.
+
+   The button stays a body child rather than moving into #top-bar,
+   because the top bar is hidden on the cover and a child of a
+   hidden parent would go with it. Instead the header row reserves
+   the space and the toggle is pinned into it.
+
+   Below 520px it is icon only at the full 44px tap target, with
+   the words kept for screen readers and as a tooltip. Above that
+   the label is shown, so the corpus standard of an icon plus
+   "Light mode" or "Dark mode" holds wherever there is room.
+   ============================================================ */
+.mode-toggle {
+  position: fixed !important;
+  top: 0.4rem !important; right: 0.55rem !important;
+  bottom: auto !important; left: auto !important;
+  opacity: 1 !important;
+  min-height: 44px; min-width: 44px;
+  justify-content: center;
+  box-shadow: none !important;
+}
+.top-meta { padding-right: 3.4rem; }
+.container { padding-bottom: 1.4rem !important; }
+
+@media (max-width: 520px) {
+  .mode-toggle { padding: 0 !important; gap: 0 !important; }
+  .mode-toggle #mode-label {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+  .mode-toggle svg { width: 1.15rem; height: 1.15rem; }
+}
+@media (min-width: 521px) {
+  .top-meta { padding-right: 9.5rem; }
+}
+
+
+/* The quiz shell heads its page with .quiz-eyebrow rather than the
+   lesson's .top-meta, so it needed the same right hand reservation
+   or the toggle covered "Question 1 of 18". */
+.quiz-eyebrow { padding-right: 3.4rem; }
+@media (min-width: 521px) { .quiz-eyebrow { padding-right: 9.5rem; } }
+
 </style>
 </head>
 <body>
@@ -674,7 +785,7 @@ body.dark .inter-item.ok span, body.dark .inter-item.ok .rank { color: var(--on-
       <div class="rule"></div>
     </div>
     <div class="score-row">
-      <div class="score-block"><div class="score-num"><span id="score-correct">0</span><span class="score-den">/<span id="score-total">0</span></span></div><div class="score-label">Correct</div></div>
+      <div class="score-block"><div class="score-num"><span id="score-correct">0</span><span class="score-den">/<span id="score-total">0</span></span></div><div class="score-label">Questions right</div></div>
       <div class="score-block"><div class="score-num"><span id="score-percent">0</span><span class="score-den">%</span></div><div class="score-label">Accuracy</div></div>
       <div class="score-block"><div class="score-word" id="score-grade">-</div><div class="score-label">Band</div></div>
     </div>
@@ -1272,6 +1383,7 @@ buildMenu();
     ic.innerHTML = offering==="light" ? SUN : MOON;
     b.setAttribute("aria-pressed", showing==="dark" ? "true" : "false");
     b.setAttribute("aria-label", "Switch to " + offering + " mode");
+    b.setAttribute("title", offering==="light" ? "Light mode" : "Dark mode");
   }
   b.addEventListener("click",function(){
     var flipped=document.body.classList.toggle(CLS);
