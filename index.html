@@ -540,6 +540,76 @@ body.dark .figure figcaption { border-top-color: var(--a1); }
     border: 1px solid var(--hair); border-radius: 0; }
   .review-actions { display: grid; gap: 0.7rem; }
 
+
+/* ============================================================
+   EARNED STATES READ GREEN
+   Hand patch, applied identically to every file in the unit.
+
+   Green is added as its own token rather than by repointing
+   --a2, because --a2 in this skin also paints the primary
+   button, the marks, the story rule and the breakdown label,
+   and in Lesson 2 it now carries Source B as well. Repointing
+   would turn the whole unit green and lose the argument the
+   red and the blue are making.
+
+   The correct option fills solid, with the skin's hard offset
+   shadow, so it reads as the answer from across the room and
+   not on inspection. The asymmetry is deliberate: the option
+   you got right is loud, the one you picked and got wrong
+   stays a quiet clay tint with a firm border, because a
+   learner who is already wrong does not need it shouted at.
+
+   Measured on this skin's own grounds:
+     light  paper text on #215239      8.63 : 1
+            the fill against the page  7.76 : 1
+     dark   ink text on #8BD1A4        9.99 : 1
+   Colour is never the only signal: the tick and the cross
+   carry the state too, which matters because correct green
+   against wrong red is the hard pair for the commonest form
+   of colour blindness.
+   ============================================================ */
+:root { --ok: #215239; --ok-rgb: 33,82,57; --on-ok: #FBFAF7; }
+body.dark { --ok: #8BD1A4; --ok-rgb: 139,209,164; --on-ok: #14181C; }
+
+.option.correct, .option-btn.correct,
+body.dark .option.correct, body.dark .option-btn.correct {
+  background: var(--ok) !important;
+  border: 2px solid var(--ok) !important;
+  box-shadow: 5px 5px 0 rgba(var(--ok-rgb),0.30) !important;
+  color: var(--on-ok) !important;
+}
+.option.correct .opt-text, .option-btn.correct .opt-text,
+.option.correct .opt-letter, .option-btn.correct .opt-letter,
+.option.correct .opt-mark, .option-btn.correct .opt-mark,
+body.dark .option.correct .opt-text, body.dark .option-btn.correct .opt-text,
+body.dark .option.correct .opt-letter, body.dark .option-btn.correct .opt-letter,
+body.dark .option.correct .opt-mark, body.dark .option-btn.correct .opt-mark {
+  color: var(--on-ok) !important;
+}
+.option.correct .opt-letter, .option-btn.correct .opt-letter { opacity: 0.85; }
+
+.option.wrong, .option-btn.wrong {
+  background: var(--no-bg) !important;
+  border: 2px solid var(--a1) !important;
+  box-shadow: none !important;
+}
+.option.wrong .opt-letter, .option.wrong .opt-mark,
+.option-btn.wrong .opt-letter, .option-btn.wrong .opt-mark { color: var(--a1) !important; }
+
+/* A correctly placed item in a sort or order question is the
+   same signal, so it fills the same way. */
+.inter-item.ok, body.dark .inter-item.ok {
+  background: var(--ok) !important;
+  border: 2px solid var(--ok) !important;
+  color: var(--on-ok) !important;
+}
+.inter-item.ok span, .inter-item.ok .rank,
+body.dark .inter-item.ok span, body.dark .inter-item.ok .rank { color: var(--on-ok) !important; }
+.inter-item.ok .rank { opacity: 0.85; }
+
+/* The results bars measure what the learner earned, so they match. */
+.bd-fill { background: var(--ok) !important; }
+
 </style>
 </head>
 <body>
