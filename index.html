@@ -721,9 +721,22 @@ body.dark .inter-item.ok span, body.dark .inter-item.ok .rank { color: var(--on-
 .quiz-eyebrow { padding-right: 3.4rem; }
 @media (min-width: 521px) { .quiz-eyebrow { padding-right: 9.5rem; } }
 
+
+/* ---- The wrong-answer glyph clears 4.5 on the dark ground -----
+   --a1 measured 3.76 against the wrong-option tint once the rgba
+   is composited. The tick and the cross are what carry the state
+   for a learner who cannot separate the two hues, so the glyph
+   has to be legible on its own. 5.57 after this.
+   -------------------------------------------------------------- */
+body.dark .option.wrong .opt-letter, body.dark .option.wrong .opt-mark,
+body.dark .option-btn.wrong .opt-letter, body.dark .option-btn.wrong .opt-mark,
+body.dark .inter-item.no .inter-mark, body.dark .inter-item.no .rank {
+  color: #EFA79E !important;
+}
+
 </style>
 </head>
-<body>
+<body class="dark">
 <div class="container">
 
   <!-- MENU -->
@@ -929,13 +942,13 @@ const QUESTIONS = [
   {
     "question": "Why is the term satellite state used for countries like Poland and Hungary?",
     "options": [
-      "They were independent on paper but their governments followed Moscow",
+      "They were called independent but their governments took orders from Moscow",
       "They had been annexed formally and made part of the Soviet Union",
       "They were occupied by Soviet troops and had no government at all",
-      "They chose communism freely and then allied themselves with Moscow"
+      "They chose communism freely and then allied themselves closely with Moscow"
     ],
     "correct": 0,
-    "explanation": "On paper these countries were independent. They had their own flags, their own borders and their own governments. In practice those governments did what Moscow told them. Option {opt1} describes Estonia, Latvia and Lithuania, which were swallowed whole and stopped being countries. Use the two words as if they mean the same thing and you cannot show you know the difference.",
+    "explanation": "These countries were called independent. They had their own flags, their own borders and their own governments. In reality those governments did what Moscow told them. Option {opt1} describes Estonia, Latvia and Lithuania, which were swallowed whole and stopped being countries. Use the two words as if they mean the same thing and you cannot show you know the difference.",
     "id": 7,
     "slot": 7,
     "section": "Spheres of interest and the Iron Curtain",
@@ -1248,7 +1261,7 @@ document.getElementById('restart-btn').addEventListener('click', () => { review.
 
 /* The button at the end of the file is the thing that continues. It does not
    point at a control somewhere else on the page. */
-document.getElementById('finish-btn').addEventListener('click', () => { KulaLMS.advance(); });
+document.getElementById('finish-btn').onclick = () => { KulaLMS.advance(); };
 
 function weakestSection(){
   let worst = SECTIONS[0], worstPct = 2;
@@ -1276,13 +1289,13 @@ function showReview(){
   let band='', desc='';
   const weakest = weakestSection();
   if(IS_AFTER){
-    if(pct>=85){ band='Excellent'; desc='The facts have stuck. Your last step is to write the essay question out under timed conditions: one hour, three pages.'; }
-    else if(pct>=70){ band='Strong'; desc='Strong recall after the lessons. Look again at anything you missed, then write the essay out under time.'; }
-    else if(pct>=55){ band='Solid'; desc='A solid base. Your weakest area was ' + weakest + '. Go back to the lesson that covers it, then try the timed essay.'; }
+    if(pct>=85){ band='Excellent'; desc='The facts have stuck. Your last step is to sit the Lesson 5 source run again, this time against the clock.'; }
+    else if(pct>=70){ band='Strong'; desc='Strong recall after the lessons. Look again at anything you missed, then sit the Lesson 5 source run against the clock.'; }
+    else if(pct>=55){ band='Solid'; desc='A solid base. Your weakest area was ' + weakest + '. Go back to the lesson that covers it, then sit the Lesson 5 source run against the clock.'; }
     else if(pct>=40){ band='Patchy'; desc='Some of it has stuck and some has not. Your weakest area was ' + weakest + '. Revisit that lesson, then take this again.'; }
     else { band='Start again'; desc='The facts have not settled yet. Go back to the lessons, starting with ' + weakest + ', and work through them again before the exam.'; }
   } else {
-    if(pct>=85){ band='Excellent'; desc='A strong start even before the lessons. Go to Lesson 1 and start turning these facts into an argument.'; }
+    if(pct>=85){ band='Excellent'; desc='A strong start even before the lessons. Go to Lesson 1 and start turning these facts into evidence you can use.'; }
     else if(pct>=70){ band='Strong'; desc='You already know a lot of this. Go to Lesson 1, where you learn to use it.'; }
     else if(pct>=55){ band='Solid'; desc='A decent base to build on. Go to Lesson 1 and start building the argument.'; }
     else if(pct>=40){ band='Patchy'; desc='A normal starting point before studying a topic. Go to Lesson 1: that is exactly what it is for.'; }
@@ -1361,10 +1374,18 @@ buildMenu();
      class name and never "native": neither describes anything on a unit built
      the other way round. For an essay unit set NATIVE "dark", FLIP "light",
      CLS "bright". Nothing else changes. */
-  var NATIVE = "light";   // the mode this unit is designed in
-  var FLIP   = "dark";    // the mode the toggle offers
+  var NATIVE = "light";   // the mode the stylesheet produces with no class on body
+  var FLIP   = "dark";    // the mode the class produces
   var CLS    = "dark";    // the class that produces FLIP in this unit
-  try{ if(localStorage.getItem("kula-mode")===FLIP){ document.body.classList.add(CLS); } }catch(e){}
+  /* The check OPENS in dark, matching the five lessons either side of it, so
+     the ground does not flip when a learner moves between them. body carries
+     the class in the markup rather than having it added here, so there is no
+     flash of the light ground before this script runs at the foot of the
+     document. All this block does is honour a learner who chose otherwise. */
+  var stored = null;
+  try{ stored = localStorage.getItem("kula-mode"); }catch(e){}
+  if(stored === NATIVE) document.body.classList.remove(CLS);
+  else if(stored === FLIP) document.body.classList.add(CLS);
   var SUN='<circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/>';
   var MOON='<path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/>';
   var b=document.getElementById("kula-mode-toggle");
