@@ -158,21 +158,21 @@
      - mono appears nowhere */
 
 :root {
-  --sand:  #EFEEEA;   /* page: cold paper */
-  --paper: #FBFAF7;   /* cards */
-  --cut:   #E4E3DD;   /* insets, sources, carousels */
-  --ink:   #1B1D1F;
-  --clay:  #5A5F63;   /* stage tags, quiet labels */
+  --sand:  #EAEEF4;   /* page: cold screen white, no cream */
+  --paper: #FFFFFF;   /* cards: flat, not ivory */
+  --cut:   #DFE5EE;   /* insets, sources, carousels */
+  --ink:   #0E1219;
+  --clay:  #4B5563;   /* stage tags, quiet labels */
   /* Muted text: captions, attributions, counters. The previous value measured 3.07
      against the card ground and was the lightest of the four source skins. */
-  --fade:  #5E6367;
+  --fade:  #586372;
   /* border red for structure, steel blue for reward */
-  --a1: #A32B23;  --a1-rgb: 163,43,35;
-  --a2: #2E5F8A;  --a2-rgb: 46,95,138;
+  --a1: #5A12E0;  --a1-rgb: 90,18,224;
+  --a2: #0057D9;  --a2-rgb: 0,87,217;
   /* The two hover steps are derived, not identity. Left in the engine block
      they kept the engine's bottle green against this skin's steel blue. */
-  --ink-deep: #131516;
-  --a2-deep:  #214463;
+  --ink-deep: #0A0D12;
+  --a2-deep:  #0043A8;
   --sans:  'Archivo Narrow', 'Archivo', 'Inter', system-ui, -apple-system, Arial, sans-serif;
   --serif: 'Source Serif 4', 'Charter', Georgia, serif;
   --mono:  var(--sans);
@@ -183,7 +183,7 @@ body {
   font-family: var(--serif) !important;
   background-image:
     repeating-linear-gradient(45deg,
-      transparent 0 9px, rgba(27,29,31,0.034) 9px 10px) !important;
+      transparent 0 9px, rgba(14,18,25,0.034) 9px 10px) !important;
 }
 h1, h2, h3 {
   font-family: var(--sans) !important;
@@ -208,7 +208,7 @@ h1, h2, h3 {
   letter-spacing: 0.01em !important;
   text-transform: none !important;
   background: var(--a1) !important;
-  color: #F6F1F0 !important;
+  color: #FFFFFF !important;
   border-radius: 0 !important;
   padding: 0.24rem 0.62rem !important;
   display: inline-block;
@@ -225,7 +225,7 @@ h1, h2, h3 {
   background: var(--cut) !important;
   background-image:
     repeating-linear-gradient(45deg,
-      transparent 0 7px, rgba(163,43,35,0.055) 7px 8px) !important;
+      transparent 0 7px, rgba(90,18,224,0.055) 7px 8px) !important;
   border: 2px solid var(--a1) !important;
   border-radius: 0 !important;
   padding: 1.15rem 1.2rem !important;
@@ -237,7 +237,7 @@ h1, h2, h3 {
   font-weight: 700 !important;
   letter-spacing: 0.01em !important;
   text-transform: none !important;
-  color: #F6F1F0 !important;
+  color: #FFFFFF !important;
   background: var(--a1);
   border-radius: 0;
   padding: 0.5rem 0.62rem;
@@ -285,12 +285,12 @@ h1, h2, h3 {
 
 .btn-begin {
   background: var(--a1) !important;
-  color: #F6F1F0 !important;
+  color: #FFFFFF !important;
   border: 2px solid var(--a1) !important;
   border-radius: 0 !important;
   font-family: var(--sans) !important;
 }
-.btn-begin:hover { background: #862017 !important; border-color: #862017 !important; }
+.btn-begin:hover { background: #3A0B96 !important; border-color: #3A0B96 !important; }
 
 .stat-num { color: var(--a1) !important; font-family: var(--sans) !important; font-weight: 700 !important; }
 .stat-label { color: var(--clay) !important; font-family: var(--sans) !important; }
@@ -299,44 +299,44 @@ h1, h2, h3 {
 /* ---- DARK MODE ------------------------------------------------------------
    The hatch inverts to a blueprint negative rather than simply darkening. */
 body.dark {
-  --sand:  #14181C;
-  --paper: #1C2228;
-  --cut:   #232B32;
-  --ink:   #E7EBEE;
-  --clay:  #9EA9B2;
-  --fade:  #8B959D;
-  /* Lifted from #D4736A: it cleared 4.5 on the card ground but measured 4.42 on the
+  --sand:  #090B11;
+  --paper: #141822;
+  --cut:   #1D2330;
+  --ink:   #EDF1F8;
+  --clay:  #9AA6B8;
+  --fade:  #8E9BAE;
+  /* Lifted from #B79BFF: it cleared 4.5 on the card ground but measured 4.42 on the
      darker --cut inset, where the option letters and the rank numbers sit. */
-  --a1: #DA7E75;  --a1-rgb: 218,126,117;
-  --a2: #6BA3D6;  --a2-rgb: 107,163,214;
+  --a1: #B79BFF;  --a1-rgb: 183,155,255;
+  --a2: #4CC9F0;  --a2-rgb: 76,201,240;
   /* On a dark ground a hover step goes lighter, not deeper. */
   --ink-deep: #FFFFFF;
-  --a2-deep:  #96C0E6;
+  --a2-deep:  #7FDCF7;
 }
 body.dark { background-image:
   repeating-linear-gradient(45deg,
-    transparent 0 9px, rgba(231,235,238,0.042) 9px 10px) !important; }
+    transparent 0 9px, rgba(237,241,248,0.042) 9px 10px) !important; }
 body.dark .card, body.dark .stat-wrap, body.dark .carousel, body.dark .kt {
   border-top-color: var(--a1) !important; border-left-color: var(--a1) !important; }
 body.dark .source {
   border-color: var(--a1) !important;
   background-image: repeating-linear-gradient(45deg,
-    transparent 0 7px, rgba(212,115,106,0.09) 7px 8px) !important; }
+    transparent 0 7px, rgba(183,155,255,0.09) 7px 8px) !important; }
 body.dark .stage-tag, body.dark .kt-label,
-body.dark .expl-label, body.dark .pop-label { background: rgba(212,115,106,0.22) !important; color: #F2C9C4 !important; }
-body.dark .source-attr { background: rgba(212,115,106,0.22) !important; color: #F2C9C4 !important; }
-body.dark .btn-begin { background: var(--a1) !important; border-color: var(--a1) !important; color: #14181C !important; }
-body.dark .btn-begin:hover { background: #E08A82 !important; border-color: #E08A82 !important; }
-body.dark .mode-toggle { background: var(--paper); border-color: rgba(231,235,238,0.24); }
+body.dark .expl-label, body.dark .pop-label { background: rgba(183,155,255,0.22) !important; color: #EFE7FF !important; }
+body.dark .source-attr { background: rgba(183,155,255,0.22) !important; color: #EFE7FF !important; }
+body.dark .btn-begin { background: var(--a1) !important; border-color: var(--a1) !important; color: #090B11 !important; }
+body.dark .btn-begin:hover { background: #CDB6FF !important; border-color: #CDB6FF !important; }
+body.dark .mode-toggle { background: var(--paper); border-color: rgba(237,241,248,0.24); }
 body.dark .rule, body.dark .cover-rule, body.dark .flourish, body.dark .story-rule {
   background-image:
     linear-gradient(90deg, var(--a1) 0 84px, transparent 84px 100%),
     repeating-linear-gradient(90deg, var(--a1) 84px 96px, transparent 96px 106px) !important; }
 
-body.dark .chip { background: rgba(212,115,106,0.16) !important; color: #F2C9C4 !important; }
-body.dark .chip-recall,     body.dark .chip-extract   { background: rgba(212,115,106,0.20) !important; color: #F5D2CD !important; }
-body.dark .chip-understand, body.dark .chip-interpret { background: rgba(107,163,214,0.20) !important; color: #C3DCF1 !important; }
-body.dark .chip-apply,      body.dark .chip-evaluate  { background: rgba(231,235,238,0.16) !important; color: #E7EBEE !important; }
+body.dark .chip { background: rgba(183,155,255,0.16) !important; color: #EFE7FF !important; }
+body.dark .chip-recall,     body.dark .chip-extract   { background: rgba(183,155,255,0.20) !important; color: #EFE7FF !important; }
+body.dark .chip-understand, body.dark .chip-interpret { background: rgba(76,201,240,0.20) !important; color: #CFF0FC !important; }
+body.dark .chip-apply,      body.dark .chip-evaluate  { background: rgba(237,241,248,0.16) !important; color: #EDF1F8 !important; }
 
 
 /* ---- DARK MODE STATE COLOURS ----------------------------------------------
@@ -346,42 +346,42 @@ body.dark .chip-apply,      body.dark .chip-evaluate  { background: rgba(231,235
 
 body.dark .option, body.dark .option-btn {
   background: var(--cut) !important;
-  border-color: rgba(231,235,238,0.20) !important;
+  border-color: rgba(237,241,248,0.20) !important;
   color: var(--ink) !important;
 }
 body.dark .option.selected, body.dark .option-btn.selected {
-  background: rgba(107,163,214,0.16) !important; border-color: #6BA3D6 !important; }
+  background: rgba(76,201,240,0.16) !important; border-color: #4CC9F0 !important; }
 body.dark .option.correct, body.dark .option-btn.correct {
-  background: rgba(107,163,214,0.20) !important;
-  border-color: #6BA3D6 !important;
+  background: rgba(76,201,240,0.20) !important;
+  border-color: #4CC9F0 !important;
   color: var(--ink) !important;
 }
 body.dark .option.wrong, body.dark .option-btn.wrong {
-  background: rgba(212,115,106,0.18) !important;
-  border-color: #D4736A !important;
+  background: rgba(183,155,255,0.18) !important;
+  border-color: #B79BFF !important;
   color: var(--ink) !important;
 }
 body.dark .option.correct .opt-text, body.dark .option-btn.correct .opt-text,
 body.dark .option.wrong   .opt-text, body.dark .option-btn.wrong   .opt-text { color: var(--ink) !important; }
-body.dark .option.correct .opt-letter, body.dark .option-btn.correct .opt-letter { color: #8FBEE4 !important; }
-body.dark .option.wrong   .opt-letter, body.dark .option-btn.wrong   .opt-letter { color: #E39A93 !important; }
+body.dark .option.correct .opt-letter, body.dark .option-btn.correct .opt-letter { color: #7FDCF7 !important; }
+body.dark .option.wrong   .opt-letter, body.dark .option-btn.wrong   .opt-letter { color: #CDB6FF !important; }
 body.dark .opt-mark { color: var(--ink) !important; }
 
 body.dark .primary-btn {
   background: var(--cut) !important;
-  border: 1px solid rgba(212,115,106,0.40) !important;
+  border: 1px solid rgba(183,155,255,0.40) !important;
   color: var(--ink) !important;
 }
-body.dark .primary-btn:hover { background: #2C353D !important; }
+body.dark .primary-btn:hover { background: #252C3B !important; }
 body.dark .primary-btn .btn-title { color: var(--ink) !important; }
 body.dark .primary-btn .btn-sub, body.dark .primary-btn .btn-arrow { color: var(--clay) !important; }
-body.dark .section-btn { border-color: rgba(231,235,238,0.18) !important; color: var(--ink) !important; }
+body.dark .section-btn { border-color: rgba(237,241,248,0.18) !important; color: var(--ink) !important; }
 body.dark .section-btn:hover { background: var(--cut) !important; border-color: var(--a1) !important; }
-body.dark .primary-btn-small { background: var(--a1) !important; color: #14181C !important; }
-body.dark .primary-btn-small:hover:not(:disabled) { background: #E08A82 !important; }
-body.dark .secondary-btn { border-color: rgba(231,235,238,0.30) !important; color: var(--ink) !important; }
+body.dark .primary-btn-small { background: var(--a1) !important; color: #090B11 !important; }
+body.dark .primary-btn-small:hover:not(:disabled) { background: #CDB6FF !important; }
+body.dark .secondary-btn { border-color: rgba(237,241,248,0.30) !important; color: var(--ink) !important; }
 body.dark .secondary-btn:hover:not(:disabled) { background: var(--cut) !important; }
-body.dark .explanation { background: var(--cut) !important; border-color: rgba(212,115,106,0.28) !important; }
+body.dark .explanation { background: var(--cut) !important; border-color: rgba(183,155,255,0.28) !important; }
 body.dark .expl-text { color: var(--ink) !important; }
 body.dark .quiz-foot, body.dark .quiz-foot a { color: var(--clay) !important; }
 
@@ -405,8 +405,8 @@ body { padding-bottom: 4.5rem !important; }
   border-top: 2px solid var(--a1);
   padding-top: 0.6rem;
 }
-.figure img { border: 1px solid rgba(163,43,35,0.35) !important; border-radius: 0 !important; }
-body.dark .figure img { border-color: rgba(212,115,106,0.38) !important; filter: brightness(0.9) contrast(1.02); }
+.figure img { border: 1px solid rgba(90,18,224,0.35) !important; border-radius: 0 !important; }
+body.dark .figure img { border-color: rgba(183,155,255,0.38) !important; filter: brightness(0.9) contrast(1.02); }
 body.dark .figure figcaption { border-top-color: var(--a1); }
 
 
@@ -568,8 +568,8 @@ body.dark .figure figcaption { border-top-color: var(--a1); }
    against wrong red is the hard pair for the commonest form
    of colour blindness.
    ============================================================ */
-:root { --ok: #215239; --ok-rgb: 33,82,57; --on-ok: #FBFAF7; }
-body.dark { --ok: #8BD1A4; --ok-rgb: 139,209,164; --on-ok: #14181C; }
+:root { --ok: #215239; --ok-rgb: 33,82,57; --on-ok: #FFFFFF; }
+body.dark { --ok: #8BD1A4; --ok-rgb: 139,209,164; --on-ok: #090B11; }
 
 .option.correct, .option-btn.correct,
 body.dark .option.correct, body.dark .option-btn.correct {
